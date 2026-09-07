@@ -1,4 +1,4 @@
-import { GitBranch } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/profile";
 import Section from "./Section";
 
@@ -10,28 +10,45 @@ function labelRepo(url: string): string {
 
 export default function Projects() {
   return (
-    <Section id="proyek" title="Proyek">
-      <ul className="grid gap-6 sm:grid-cols-2">
-        {projects.map((project) => (
+    <Section id="proyek" title="Proyek" index="04">
+      <ul className="grid gap-6 md:grid-cols-2">
+        {projects.map((project, i) => (
           <li
             key={project.name}
-            className="flex flex-col rounded-lg border border-slate-200 bg-white p-6 transition-colors hover:border-slate-300 dark:border-slate-800 dark:bg-slate-900/40 dark:hover:border-slate-700"
+            data-reveal
+            style={{ "--reveal-delay": `${(i % 2) * 90}ms` } as React.CSSProperties}
+            className="group relative flex flex-col border border-line bg-bg-elev p-7 shadow-[var(--shadow-card)] transition duration-200 hover:-translate-y-1 hover:border-accent/60 hover:shadow-[var(--shadow-lift)] sm:p-8"
           >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">
+            {/* Aksen tipis di tepi atas, muncul saat hover. */}
+            <span
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-accent transition-transform duration-300 group-hover:scale-x-100"
+            />
+
+            <span
+              aria-hidden="true"
+              className="font-mono text-[11px] tracking-[0.24em] text-ink-3"
+            >
+              {String(i + 1).padStart(2, "0")}
+            </span>
+
+            <h3 className="mt-4 text-lg font-semibold text-ink sm:text-xl">
               {project.name}
             </h3>
 
             {project.description ? (
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+              <p className="mt-4 max-w-[62ch] text-[0.9375rem] leading-[1.7] text-ink-2">
                 {project.description}
               </p>
             ) : null}
 
-            <ul className="mt-5 flex flex-wrap gap-2">
+            {/* Chip teknologi selalu menempel ke dasar kartu, sehingga kartu
+                tanpa deskripsi tidak menyisakan rongga kosong. */}
+            <ul className="mt-auto flex flex-wrap gap-2 pt-8">
               {project.tech.map((tech) => (
                 <li
                   key={tech}
-                  className="rounded border border-slate-200 bg-slate-50 px-2 py-1 font-mono text-xs text-slate-600 dark:border-slate-800 dark:bg-slate-800/60 dark:text-slate-300"
+                  className="border border-line bg-bg-soft px-2.5 py-1 font-mono text-[11px] tracking-wide text-ink-2"
                 >
                   {tech}
                 </li>
@@ -39,17 +56,20 @@ export default function Projects() {
             </ul>
 
             {project.repos && project.repos.length > 0 ? (
-              <ul className="mt-5 space-y-2 border-t border-slate-100 pt-4 dark:border-slate-800">
+              <ul className="mt-6 space-y-1.5 border-t border-line pt-5">
                 {project.repos.map((repo) => (
                   <li key={repo}>
                     <a
                       href={repo}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="inline-flex items-center gap-2 font-mono text-xs text-emerald-700 hover:underline dark:text-emerald-400"
+                      className="inline-flex items-center gap-2 font-mono text-xs text-accent-ink underline-offset-4 hover:underline"
                     >
-                      <GitBranch className="h-3.5 w-3.5" aria-hidden="true" />
                       <span>{labelRepo(repo)}</span>
+                      <ArrowUpRight
+                        className="h-3.5 w-3.5 shrink-0"
+                        aria-hidden="true"
+                      />
                       <span className="sr-only">
                         (repositori {project.name} di GitHub)
                       </span>

@@ -1,33 +1,53 @@
 import { stats } from "@/data/profile";
+import CountUp from "./CountUp";
 
 export default function StatsBand() {
   return (
     <section
       aria-labelledby="angka-judul"
-      className="border-y border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900/40"
+      className="border-y border-line bg-bg-soft"
     >
-      <div className="mx-auto max-w-5xl px-5 py-12 sm:px-8 sm:py-14">
-        <h2
-          id="angka-judul"
-          className="font-mono text-xs tracking-widest text-slate-500 uppercase dark:text-slate-400"
-        >
-          Dalam angka
-        </h2>
-        <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label}>
-              <dt className="sr-only">{stat.label}</dt>
-              <dd>
-                <span className="block text-3xl font-semibold tracking-tight text-slate-900 tabular-nums sm:text-4xl dark:text-emerald-400">
-                  {stat.value}
-                </span>
-                <span className="mt-2 block text-sm text-slate-600 dark:text-slate-400">
-                  {stat.label}
-                </span>
-              </dd>
-            </div>
-          ))}
-        </dl>
+      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <div className="grid gap-6 md:grid-cols-[7rem_minmax(0,1fr)] md:gap-10">
+          <div data-reveal>
+            <span
+              aria-hidden="true"
+              className="font-mono text-xs tracking-[0.28em] text-accent-ink"
+            >
+              01
+            </span>
+          </div>
+
+          <div>
+            <h2
+              id="angka-judul"
+              data-reveal
+              className="font-mono text-xs tracking-[0.28em] text-ink-3 uppercase"
+            >
+              Dalam angka
+            </h2>
+
+            <dl className="mt-10 grid grid-cols-1 gap-px border border-line-strong bg-line-strong sm:grid-cols-2 lg:grid-cols-4">
+              {stats.map((stat, i) => (
+                <div
+                  key={stat.label}
+                  data-reveal
+                  style={
+                    { "--reveal-delay": `${i * 90}ms` } as React.CSSProperties
+                  }
+                  className="flex flex-col-reverse gap-4 bg-bg-soft p-6 sm:p-8"
+                >
+                  <dt className="max-w-[22ch] font-mono text-[11px] leading-relaxed tracking-[0.18em] text-ink-3 uppercase">
+                    {stat.label}
+                  </dt>
+                  <dd className="text-stat font-semibold text-ink tabular-nums">
+                    <CountUp value={stat.value} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
       </div>
     </section>
   );

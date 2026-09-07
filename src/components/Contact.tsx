@@ -1,4 +1,4 @@
-import { Code2, ExternalLink, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Code2, Mail, MapPin, Phone } from "lucide-react";
 import { identity } from "@/data/profile";
 import Section from "./Section";
 
@@ -28,7 +28,7 @@ export default function Contact() {
       label: "LinkedIn",
       value: identity.linkedin.replace("https://www.", ""),
       href: identity.linkedin,
-      Icon: ExternalLink,
+      Icon: ArrowUpRight,
       external: true,
     },
     {
@@ -44,27 +44,32 @@ export default function Contact() {
     <Section
       id="kontak"
       title="Kontak"
+      index="08"
       description="Terbuka untuk diskusi seputar backend Go, infrastruktur, dan sistem berskala besar."
     >
-      <ul className="grid gap-4 sm:grid-cols-2">
-        {kontak.map(({ label, value, href, Icon, external }) => (
-          <li key={label}>
+      <ul className="grid gap-px border border-line-strong bg-line-strong sm:grid-cols-2">
+        {kontak.map(({ label, value, href, Icon, external }, i) => (
+          <li
+            key={label}
+            data-reveal
+            style={{ "--reveal-delay": `${(i % 2) * 80}ms` } as React.CSSProperties}
+          >
             <a
               href={href}
               {...(external
                 ? { target: "_blank", rel: "noreferrer noopener" }
                 : {})}
-              className="flex items-start gap-4 rounded-lg border border-slate-200 p-5 transition-colors hover:border-emerald-500/60 hover:bg-slate-50 dark:border-slate-800 dark:hover:border-emerald-500/50 dark:hover:bg-slate-900/60"
+              className="group flex h-full items-start gap-5 bg-bg p-6 transition-colors hover:bg-bg-soft sm:p-7"
             >
               <Icon
-                className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400"
+                className="mt-1 h-4 w-4 shrink-0 text-accent transition-transform duration-200 group-hover:translate-x-0.5"
                 aria-hidden="true"
               />
-              <span>
-                <span className="block font-mono text-xs tracking-widest text-slate-500 uppercase dark:text-slate-400">
+              <span className="min-w-0">
+                <span className="block font-mono text-[11px] tracking-[0.22em] text-ink-3 uppercase">
                   {label}
                 </span>
-                <span className="mt-1 block text-sm break-all text-slate-800 dark:text-slate-200">
+                <span className="mt-2 block font-mono text-sm break-all text-ink group-hover:text-accent-ink">
                   {value}
                 </span>
               </span>
@@ -73,8 +78,8 @@ export default function Contact() {
         ))}
       </ul>
 
-      <p className="mt-8 inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-        <MapPin className="h-4 w-4" aria-hidden="true" />
+      <p className="mt-8 inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.18em] text-ink-3 uppercase">
+        <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
         {identity.location}
       </p>
     </Section>

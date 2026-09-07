@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 type SectionProps = {
   id: string;
   title: string;
+  /** Nomor editorial dua digit, mis. "02". Murni dekoratif. */
+  index: string;
   description?: string;
   children: ReactNode;
 };
@@ -10,6 +12,7 @@ type SectionProps = {
 export default function Section({
   id,
   title,
+  index,
   description,
   children,
 }: SectionProps) {
@@ -17,21 +20,40 @@ export default function Section({
     <section
       id={id}
       aria-labelledby={`${id}-judul`}
-      className="border-t border-slate-200 py-16 sm:py-20 dark:border-slate-800/70"
+      className="scroll-mt-24 border-t border-line py-20 sm:py-28"
     >
-      <div className="mx-auto max-w-5xl px-5 sm:px-8">
-        <h2
-          id={`${id}-judul`}
-          className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl dark:text-slate-50"
-        >
-          {title}
-        </h2>
-        {description ? (
-          <p className="mt-2 max-w-2xl text-sm text-slate-600 dark:text-slate-400">
-            {description}
-          </p>
-        ) : null}
-        <div className="mt-10">{children}</div>
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="grid gap-6 md:grid-cols-[7rem_minmax(0,1fr)] md:gap-10">
+          <div data-reveal className="md:pt-3">
+            <span
+              aria-hidden="true"
+              className="font-mono text-xs tracking-[0.28em] text-accent-ink"
+            >
+              {index}
+            </span>
+            <span
+              aria-hidden="true"
+              className="mt-3 hidden h-px w-12 bg-line-strong md:block"
+            />
+          </div>
+
+          <div>
+            <div data-reveal>
+              <h2
+                id={`${id}-judul`}
+                className="text-h2 font-semibold text-ink text-balance"
+              >
+                {title}
+              </h2>
+              {description ? (
+                <p className="mt-4 max-w-[65ch] text-base leading-relaxed text-ink-3">
+                  {description}
+                </p>
+              ) : null}
+            </div>
+            <div className="mt-10 sm:mt-14">{children}</div>
+          </div>
+        </div>
       </div>
     </section>
   );

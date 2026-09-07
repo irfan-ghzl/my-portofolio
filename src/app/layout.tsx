@@ -1,6 +1,19 @@
 import type { Metadata } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { identity } from "@/data/profile";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: `${identity.name} — ${identity.headline}`,
@@ -37,11 +50,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="id" className="dark h-full">
+    <html
+      lang="id"
+      className={`dark h-full ${inter.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="min-h-full bg-white text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-300">
+      <body className="bg-bg text-ink-2 min-h-full font-sans antialiased">
         {children}
       </body>
     </html>

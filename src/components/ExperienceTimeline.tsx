@@ -3,49 +3,61 @@ import Section from "./Section";
 
 export default function ExperienceTimeline() {
   return (
-    <Section id="pengalaman" title="Pengalaman">
-      <ol className="relative space-y-12 border-l border-slate-200 pl-8 sm:pl-10 dark:border-slate-800">
-        {experiences.map((exp) => (
-          <li key={`${exp.company}-${exp.period}`} className="relative">
+    <Section id="pengalaman" title="Pengalaman" index="03">
+      {/* Tulang punggung vertikal + simpul penghubung. */}
+      <ol className="relative space-y-6 before:absolute before:top-3 before:bottom-3 before:left-[7px] before:w-px before:bg-line-strong sm:space-y-8">
+        {experiences.map((exp, i) => (
+          <li
+            key={`${exp.company}-${exp.period}`}
+            data-reveal
+            style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
+            className="relative pl-8 sm:pl-12"
+          >
             <span
               aria-hidden="true"
-              className={`absolute top-1.5 -left-[calc(2rem+5px)] h-2.5 w-2.5 rounded-full sm:-left-[calc(2.5rem+5px)] ${
+              className={`absolute top-[1.15rem] left-0 h-[15px] w-[15px] rounded-full border-2 ${
                 exp.current
-                  ? "bg-emerald-500 ring-4 ring-emerald-500/20"
-                  : "bg-slate-300 dark:bg-slate-700"
+                  ? "denyut border-accent bg-accent"
+                  : "border-line-strong bg-bg"
               }`}
             />
 
-            <p className="font-mono text-xs tracking-wide text-slate-500 dark:text-slate-400">
-              {exp.period}
-              {exp.current ? (
-                <span className="ml-2 rounded-full bg-emerald-500/10 px-2 py-0.5 text-emerald-700 dark:text-emerald-400">
-                  Aktif
+            <article className="border border-line bg-bg-elev p-6 shadow-[var(--shadow-card)] transition duration-200 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[var(--shadow-lift)] sm:p-8">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[11px] tracking-[0.18em] text-ink-3 uppercase">
+                <span>{exp.period}</span>
+                {exp.current ? (
+                  <span className="border border-accent/50 bg-accent-soft px-2 py-0.5 text-accent-ink">
+                    Aktif
+                  </span>
+                ) : null}
+              </div>
+
+              <h3 className="mt-4 text-xl font-semibold text-ink sm:text-2xl">
+                {exp.role}
+              </h3>
+              <p className="mt-2 font-mono text-sm text-accent-ink">
+                {exp.company}
+                <span aria-hidden="true" className="mx-2 text-ink-3">
+                  /
                 </span>
-              ) : null}
-            </p>
+                <span className="text-ink-3">{exp.location}</span>
+              </p>
 
-            <h3 className="mt-2 text-lg font-semibold text-slate-900 dark:text-slate-100">
-              {exp.role}
-            </h3>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-              {exp.company} · {exp.location}
-            </p>
-
-            <ul className="mt-4 space-y-3">
-              {exp.bullets.map((bullet) => (
-                <li
-                  key={bullet.slice(0, 48)}
-                  className="relative pl-5 text-sm leading-relaxed text-slate-600 dark:text-slate-400"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="absolute top-2.5 left-0 h-1 w-1 rounded-full bg-emerald-600/70 dark:bg-emerald-400/70"
-                  />
-                  {bullet}
-                </li>
-              ))}
-            </ul>
+              <ul className="mt-6 max-w-[68ch] space-y-4">
+                {exp.bullets.map((bullet) => (
+                  <li
+                    key={bullet.slice(0, 48)}
+                    className="relative pl-6 text-[0.9375rem] leading-[1.75] text-ink-2"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="absolute top-[0.7em] left-0 h-px w-3 bg-accent"
+                    />
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            </article>
           </li>
         ))}
       </ol>

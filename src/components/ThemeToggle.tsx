@@ -22,7 +22,7 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={ganti}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-slate-300 bg-white text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
+      className="inline-flex h-9 w-9 items-center justify-center border border-line-strong text-ink-2 transition-colors hover:border-accent hover:text-accent-ink"
     >
       <Sun className="hidden h-4 w-4 dark:block" aria-hidden="true" />
       <Moon className="block h-4 w-4 dark:hidden" aria-hidden="true" />
