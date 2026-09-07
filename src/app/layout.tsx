@@ -58,6 +58,11 @@ export default function RootLayout({
     <html
       lang="id"
       className={`dark h-full ${inter.variable} ${jetbrainsMono.variable}`}
+      // Skrip pra-paint di bawah sengaja mengubah daftar kelas <html> sebelum
+      // React hidrasi (menerapkan tema tersimpan + memasang kelas `js`), jadi
+      // markup server memang beda dari DOM klien. Ini menyenyapkan peringatan
+      // ketidakcocokan atribut pada elemen <html> saja — bukan turunannya.
+      suppressHydrationWarning
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
