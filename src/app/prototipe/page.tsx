@@ -1,6 +1,10 @@
-import { ArrowLeft, ArrowRight, TriangleAlert } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  BlokPenyangkalan,
+  PitaTipis,
+} from "@/components/prototipe/Penyangkalan";
 import { PENYANGKALAN_PROTOTIPE, daftarPrototipe } from "@/data/prototipe";
 
 export const metadata: Metadata = {
@@ -11,29 +15,8 @@ export const metadata: Metadata = {
 /** Halaman daftar agar `/prototipe/` tidak menjadi jalur buntu. */
 export default function Halaman() {
   return (
-    <>
-      <div
-        role="note"
-        aria-label="Penyangkalan prototipe"
-        className="sticky top-0 z-50 bg-accent text-[#0a0a0b] shadow-[0_1px_0_rgba(10,10,11,0.25)]"
-      >
-        <p className="mx-auto flex max-w-6xl items-start gap-2.5 px-5 py-2.5 text-[0.8125rem] leading-snug font-medium sm:px-8">
-          <TriangleAlert
-            className="mt-[3px] h-4 w-4 shrink-0"
-            aria-hidden="true"
-          />
-          <span>
-            <strong className="font-mono text-[0.75rem] font-bold tracking-[0.14em] uppercase">
-              Prototipe UI
-            </strong>{" "}
-            — rekonstruksi antarmuka untuk keperluan portofolio,{" "}
-            <strong className="font-semibold">
-              bukan tangkapan layar aplikasi produksi
-            </strong>
-            .
-          </span>
-        </p>
-      </div>
+    <div className="laman-prototipe">
+      <PitaTipis />
 
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <header className="border-b border-line py-8 sm:py-10">
@@ -50,8 +33,12 @@ export default function Halaman() {
           <p className="mt-4 max-w-[70ch] text-[0.9375rem] leading-[1.7] text-ink-2">
             Empat rekonstruksi antarmuka yang dibuat khusus untuk portofolio ini.
             Fitur yang diperagakan dibatasi pada yang tertulis di deskripsi
-            proyek, dan seluruh datanya adalah data contoh fiktif.
+            proyek.
           </p>
+
+          <BlokPenyangkalan className="mt-6">
+            Seluruh datanya adalah data contoh fiktif.
+          </BlokPenyangkalan>
         </header>
 
         <main id="konten" className="py-10 sm:py-14">
@@ -87,6 +74,6 @@ export default function Halaman() {
           </p>
         </footer>
       </div>
-    </>
+    </div>
   );
 }

@@ -211,11 +211,9 @@ export const projects: Project[] = [
     description:
       "Aplikasi travel booking dengan arsitektur layanan terpisah: REST API berbasis Go dan frontend TypeScript sebagai aplikasi independen.",
     tech: ["Go", "TypeScript", "PostgreSQL"],
-    repos: [
-      "https://github.com/irfan-ghzl/pintour-travel",
-      "https://github.com/irfan-ghzl/travel-fe",
-      "https://github.com/irfan-ghzl/Travel",
-    ],
+    // `travel-fe` dan `Travel` sudah tidak dipakai; hanya repositori ini yang
+    // masih berjalan.
+    repos: ["https://github.com/irfan-ghzl/pintour-travel"],
     image: "/projects/pintour-travel.jpg",
     prototype: "/prototipe/pintour-travel/",
     diagram: "pintour-travel",

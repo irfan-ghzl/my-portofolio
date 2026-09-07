@@ -1,4 +1,9 @@
-import { ArrowRight, ArrowUpRight, ChevronRight } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  ChevronRight,
+  FolderGit2,
+} from "lucide-react";
 import Link from "next/link";
 import { projects } from "@/data/profile";
 import Diagram, { adaDiagram } from "./diagrams";
@@ -109,7 +114,7 @@ export default function Projects() {
                 ) : null}
 
                 {project.prototype || (project.repos && project.repos.length > 0) ? (
-                  <div className="mt-6 space-y-3 border-t border-line pt-5">
+                  <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-3 border-t border-line pt-5">
                     {project.prototype ? (
                       <p>
                         <Link
@@ -130,19 +135,23 @@ export default function Projects() {
                       </p>
                     ) : null}
 
+                    {/* Satu baris chip kecil, bukan tumpukan baris mono selebar
+                        kartu — beberapa slug repositori yang ditumpuk terbaca
+                        seperti buangan metadata, bukan tautan. */}
                     {project.repos && project.repos.length > 0 ? (
-                      <ul className="space-y-1.5">
+                      <ul className="flex flex-wrap items-center gap-2">
                         {project.repos.map((repo) => (
                           <li key={repo}>
                             <a
                               href={repo}
                               target="_blank"
                               rel="noreferrer noopener"
-                              className="inline-flex items-center gap-2 font-mono text-xs text-accent-ink underline-offset-4 hover:underline"
+                              className="inline-flex items-center gap-1.5 border border-line bg-bg-soft px-2.5 py-1 font-mono text-[11px] text-ink-2 transition-colors hover:border-accent/60 hover:text-accent-ink"
                             >
+                              <FolderGit2 className="h-3 w-3 shrink-0" aria-hidden="true" />
                               <span>{labelRepo(repo)}</span>
                               <ArrowUpRight
-                                className="h-3.5 w-3.5 shrink-0"
+                                className="h-3 w-3 shrink-0"
                                 aria-hidden="true"
                               />
                               <span className="sr-only">

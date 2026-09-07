@@ -1,16 +1,20 @@
 "use client";
 
 import { Bot, FileText, MessageSquare, ScanText, Wallet } from "lucide-react";
-import { useId, useState } from "react";
+import { useState } from "react";
 import {
   DaftarTab,
   JudulBagian,
+  KartuBaris,
   LabelContoh,
   PanelTab,
   PilStatus,
+  WadahGulir,
+  type NadaStatus,
   type Tab,
   kelasTombolSekunder,
   rupiah,
+  useIdBersih,
 } from "./primitif";
 
 /* ---------------------------------------------------------------------------
@@ -29,28 +33,28 @@ const INTEGRASI = [
     nama: "Fonnte",
     peran: "WhatsApp gateway",
     status: "Terhubung",
-    nada: "aksen" as const,
+    nada: "ok" as const,
     Ikon: MessageSquare,
   },
   {
     nama: "Midtrans",
     peran: "Payment gateway",
     status: "Sandbox",
-    nada: "garis" as const,
+    nada: "aksen" as const,
     Ikon: Wallet,
   },
   {
     nama: "Gemini",
     peran: "Chatbot AI",
     status: "Terhubung",
-    nada: "aksen" as const,
+    nada: "ok" as const,
     Ikon: Bot,
   },
   {
     nama: "OCR self-hosted",
     peran: "Ekstraksi dokumen",
     status: "Terhubung",
-    nada: "aksen" as const,
+    nada: "ok" as const,
     Ikon: ScanText,
   },
 ];
@@ -63,7 +67,7 @@ const KATALOG = [
     kuota: "24 / 30",
     harga: 1800000,
     status: "Dibuka",
-    nada: "aksen" as const,
+    nada: "ok" as const,
   },
   {
     kode: "PRG-CONTOH-02",
@@ -72,7 +76,7 @@ const KATALOG = [
     kuota: "30 / 30",
     harga: 2500000,
     status: "Penuh",
-    nada: "isi" as const,
+    nada: "bahaya" as const,
   },
   {
     kode: "PRG-CONTOH-03",
@@ -81,7 +85,7 @@ const KATALOG = [
     kuota: "9 / 25",
     harga: 2100000,
     status: "Dibuka",
-    nada: "aksen" as const,
+    nada: "ok" as const,
   },
   {
     kode: "PRG-CONTOH-04",
@@ -90,7 +94,7 @@ const KATALOG = [
     kuota: "0 / 20",
     harga: 950000,
     status: "Draf",
-    nada: "redup" as const,
+    nada: "netral" as const,
   },
 ];
 
@@ -154,11 +158,13 @@ const LEADS: {
   },
 ];
 
-const nadaTahap: Record<TahapId, "aksen" | "garis" | "redup" | "isi"> = {
-  baru: "redup",
-  dihubungi: "garis",
+/* "Menang" adalah akhir yang positif, jadi hijau — dulu justru paling redup.
+   Dua tahap di tengah masih berjalan (amber), "baru" belum tersentuh (slate). */
+const nadaTahap: Record<TahapId, NadaStatus> = {
+  baru: "netral",
+  dihubungi: "aksen",
   kualifikasi: "aksen",
-  menang: "isi",
+  menang: "ok",
 };
 
 type Invoice = {
@@ -167,7 +173,7 @@ type Invoice = {
   program: string;
   jatuhTempo: string;
   status: "Lunas" | "Menunggu" | "Kedaluwarsa";
-  nada: "isi" | "aksen" | "redup";
+  nada: NadaStatus;
   metode: string;
   rincian: { label: string; nilai: number }[];
 };
@@ -179,7 +185,7 @@ const INVOICE: Invoice[] = [
     program: "Program Contoh Beta",
     jatuhTempo: "12 Nov 2026",
     status: "Lunas",
-    nada: "isi",
+    nada: "ok",
     metode: "Midtrans — transfer virtual (sandbox)",
     rincian: [
       { label: "Biaya program", nilai: 2500000 },
@@ -206,7 +212,7 @@ const INVOICE: Invoice[] = [
     program: "Program Contoh Gama",
     jatuhTempo: "02 Nov 2026",
     status: "Kedaluwarsa",
-    nada: "redup",
+    nada: "bahaya",
     metode: "Midtrans — transfer virtual (sandbox)",
     rincian: [{ label: "Biaya program", nilai: 2100000 }],
   },
@@ -220,7 +226,7 @@ const TAB: Tab[] = [
 ];
 
 export default function ManajemenProgram() {
-  const uid = useId().replace(/:/g, "");
+  const uid = useIdBersih();
   const [tab, setTab] = useState("katalog");
   const [saring, setSaring] = useState<TahapId | "semua">("semua");
   const [invoice, setInvoice] = useState(INVOICE[0]!.nomor);
@@ -274,29 +280,25 @@ export default function ManajemenProgram() {
           id={`${uid}-modul`}
           nomor="02"
           keterangan="Empat modul yang tercatat pada deskripsi proyek. Pindah antar modul dengan klik atau tombol panah pada papan ketik."
-          aksi={<LabelContoh />}
         >
           Modul
         </JudulBagian>
 
-        <div className="mt-6 grid gap-0 border border-line bg-bg-elev lg:grid-cols-[13.5rem_minmax(0,1fr)]">
-          {/* `min-w-0` menahan rel tab agar menggulir sendiri alih-alih
-              melebarkan kolom grid di layar sempit. */}
-          <div className="min-w-0 border-b border-line p-3 lg:border-r lg:border-b-0">
-            <p className="px-3 pt-1 pb-3 font-mono text-[10px] tracking-[0.2em] text-ink-3 uppercase">
-              Navigasi
-            </p>
-            <DaftarTab
-              tabs={TAB}
-              aktif={tab}
-              onGanti={setTab}
-              idPrefix={`${uid}-modul`}
-              label="Modul sistem manajemen program"
-              vertikal
-            />
-          </div>
+        {/* Dulu rel navigasi ini berupa kolom kiri setinggi panel: di layar
+            lebar ia meninggalkan 250–550 px kolom kosong, dan di 390 px ia
+            berubah jadi penggulir mendatar yang memotong label di tengah kata.
+            Diganti pengalih tersegmentasi mendatar — pola yang sama dengan
+            pengalih peran di prototipe Pengaduan. */}
+        <div className="mt-6 space-y-4">
+          <DaftarTab
+            tabs={TAB}
+            aktif={tab}
+            onGanti={setTab}
+            idPrefix={`${uid}-modul`}
+            label="Modul sistem manajemen program"
+          />
 
-          <div className="min-w-0 p-5 sm:p-6">
+          <div className="min-w-0 border border-line bg-bg-elev p-5 sm:p-6">
             {/* ---------------- Katalog ---------------- */}
             <PanelTab idPrefix={`${uid}-modul`} id="katalog" aktif={tab}>
               <h3 className="text-lg font-semibold text-ink">Katalog program</h3>
@@ -304,11 +306,29 @@ export default function ManajemenProgram() {
                 Daftar program beserta kuota, harga, dan status publikasinya.
               </p>
 
-              <div
-                tabIndex={0}
-                role="group"
-                aria-label="Tabel katalog — dapat digulir mendatar"
-                className="mt-5 overflow-x-auto border border-line"
+              {/* Di bawah `sm` tabelnya diganti kartu bertumpuk supaya tidak
+                  ada kolom yang terpotong di tepi kanan. */}
+              <ul className="mt-5 space-y-3 sm:hidden">
+                {KATALOG.map((k) => (
+                  <li key={k.kode}>
+                    <KartuBaris
+                      judul={k.nama}
+                      atas={<PilStatus nada={k.nada}>{k.status}</PilStatus>}
+                      isi={[
+                        { label: "Kode", nilai: k.kode },
+                        { label: "Kelas", nilai: k.kelas },
+                        { label: "Kuota", nilai: k.kuota },
+                        { label: "Harga", nilai: rupiah(k.harga) },
+                      ]}
+                    />
+                  </li>
+                ))}
+              </ul>
+
+              <WadahGulir
+                label="Tabel katalog"
+                latar="bg-elev"
+                className="mt-5 hidden sm:block"
               >
                 <table className="w-full min-w-[38rem] border-collapse text-sm">
                   <caption className="sr-only">
@@ -357,7 +377,7 @@ export default function ManajemenProgram() {
                     ))}
                   </tbody>
                 </table>
-              </div>
+              </WadahGulir>
             </PanelTab>
 
             {/* ---------------- CRM leads ---------------- */}
@@ -402,11 +422,30 @@ export default function ManajemenProgram() {
                   : `Disaring: tahap ${TAHAP.find((t) => t.id === saring)?.label}.`}
               </p>
 
-              <div
-                tabIndex={0}
-                role="group"
-                aria-label="Tabel leads — dapat digulir mendatar"
-                className="mt-3 overflow-x-auto border border-line"
+              <ul aria-live="polite" className="mt-3 space-y-3 sm:hidden">
+                {leadsTampil.map((l) => (
+                  <li key={l.nama}>
+                    <KartuBaris
+                      judul={l.nama}
+                      atas={
+                        <PilStatus nada={nadaTahap[l.tahap]}>
+                          {TAHAP.find((t) => t.id === l.tahap)?.label}
+                        </PilStatus>
+                      }
+                      isi={[
+                        { label: "Kontak", nilai: l.kontak },
+                        { label: "Program", nilai: l.program },
+                        { label: "Sumber", nilai: l.sumber },
+                      ]}
+                    />
+                  </li>
+                ))}
+              </ul>
+
+              <WadahGulir
+                label="Tabel leads"
+                latar="bg-elev"
+                className="mt-3 hidden sm:block"
               >
                 <table className="w-full min-w-[40rem] border-collapse text-sm">
                   <caption className="sr-only">
@@ -449,7 +488,7 @@ export default function ManajemenProgram() {
                     ))}
                   </tbody>
                 </table>
-              </div>
+              </WadahGulir>
             </PanelTab>
 
             {/* ---------------- Invoice ---------------- */}
@@ -573,10 +612,10 @@ export default function ManajemenProgram() {
                   <p className="text-sm text-ink-2">Program Contoh Beta</p>
                   <ol className="mt-4 space-y-2.5">
                     {[
-                      ["Pendaftaran", "isi"],
-                      ["Verifikasi dokumen", "isi"],
+                      ["Pendaftaran", "ok"],
+                      ["Verifikasi dokumen", "ok"],
                       ["Pembayaran", "aksen"],
-                      ["Kelas dimulai", "redup"],
+                      ["Kelas dimulai", "netral"],
                     ].map(([label, nada], i) => (
                       <li key={label} className="flex items-center gap-3">
                         <span
@@ -587,10 +626,8 @@ export default function ManajemenProgram() {
                         </span>
                         <span className="text-sm text-ink-2">{label}</span>
                         <span className="ml-auto">
-                          <PilStatus
-                            nada={nada as "isi" | "aksen" | "redup"}
-                          >
-                            {nada === "isi"
+                          <PilStatus nada={nada as NadaStatus}>
+                            {nada === "ok"
                               ? "Selesai"
                               : nada === "aksen"
                                 ? "Berjalan"

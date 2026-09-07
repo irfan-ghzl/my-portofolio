@@ -1,20 +1,25 @@
 "use client";
 
-import { Car, Check, KeyRound, Paperclip, X } from "lucide-react";
-import { useId, useState } from "react";
+import { Check, ImageOff, KeyRound, Paperclip, X } from "lucide-react";
+import { useState } from "react";
+import { SiluetKendaraan, type JenisBodi } from "./Ilustrasi";
 import {
   Bidang,
   DaftarTab,
   JudulBagian,
+  KeadaanKosong,
   LabelContoh,
   PanelTab,
   PilStatus,
+  WadahGulir,
   type NadaStatus,
   type Tab,
   kelasInput,
+  kelasTombolBahaya,
   kelasTombolSekunder,
   kelasTombolUtama,
   rupiah,
+  useIdBersih,
 } from "./primitif";
 
 /* ---------------------------------------------------------------------------
@@ -36,6 +41,7 @@ type Mobil = {
   id: string;
   nama: string;
   plat: string;
+  bodi: JenisBodi;
   transmisi: string;
   kursi: number;
   tarif: number;
@@ -47,6 +53,7 @@ const MOBIL_AWAL: Mobil[] = [
     id: "unit-01",
     nama: "MPV Contoh 1.5",
     plat: "B 0000 CTH",
+    bodi: "mpv",
     transmisi: "Manual",
     kursi: 7,
     tarif: 350000,
@@ -56,6 +63,7 @@ const MOBIL_AWAL: Mobil[] = [
     id: "unit-02",
     nama: "Hatchback Contoh 1.2",
     plat: "B 0001 CTH",
+    bodi: "hatchback",
     transmisi: "Otomatis",
     kursi: 5,
     tarif: 275000,
@@ -65,6 +73,7 @@ const MOBIL_AWAL: Mobil[] = [
     id: "unit-03",
     nama: "SUV Contoh 2.0",
     plat: "B 0002 CTH",
+    bodi: "suv",
     transmisi: "Otomatis",
     kursi: 7,
     tarif: 525000,
@@ -74,10 +83,51 @@ const MOBIL_AWAL: Mobil[] = [
     id: "unit-04",
     nama: "Pikap Contoh 1.5",
     plat: "B 0003 CTH",
+    bodi: "pikap",
     transmisi: "Manual",
     kursi: 3,
     tarif: 300000,
     status: "perawatan",
+  },
+  {
+    id: "unit-05",
+    nama: "Sedan Contoh 1.8",
+    plat: "B 0004 CTH",
+    bodi: "sedan",
+    transmisi: "Otomatis",
+    kursi: 5,
+    tarif: 450000,
+    status: "tersedia",
+  },
+  {
+    id: "unit-06",
+    nama: "Minibus Contoh 2.5",
+    plat: "B 0005 CTH",
+    bodi: "minibus",
+    transmisi: "Manual",
+    kursi: 12,
+    tarif: 675000,
+    status: "tersedia",
+  },
+  {
+    id: "unit-07",
+    nama: "Hatchback Contoh 1.0",
+    plat: "B 0006 CTH",
+    bodi: "hatchback",
+    transmisi: "Manual",
+    kursi: 5,
+    tarif: 225000,
+    status: "disewa",
+  },
+  {
+    id: "unit-08",
+    nama: "SUV Contoh 1.5",
+    plat: "B 0007 CTH",
+    bodi: "suv",
+    transmisi: "Otomatis",
+    kursi: 5,
+    tarif: 495000,
+    status: "tersedia",
   },
 ];
 
@@ -87,10 +137,12 @@ const labelUnit: Record<StatusUnit, string> = {
   perawatan: "Perawatan",
 };
 
+/* Hijau untuk unit yang bisa disewa, amber untuk yang sedang berjalan, merah
+   untuk yang tertutup sementara. */
 const nadaUnit: Record<StatusUnit, NadaStatus> = {
-  tersedia: "aksen",
-  disewa: "isi",
-  perawatan: "redup",
+  tersedia: "ok",
+  disewa: "aksen",
+  perawatan: "bahaya",
 };
 
 type StatusPesan = "menunggu" | "dikonfirmasi" | "ditolak" | "selesai";
@@ -102,11 +154,14 @@ const labelPesan: Record<StatusPesan, string> = {
   selesai: "Selesai",
 };
 
+/* "Menunggu konfirmasi" adalah satu-satunya yang benar-benar perlu perhatian,
+   jadi hanya itu yang amber. Dikonfirmasi dan selesai berakhir positif → hijau;
+   ditolak → merah. */
 const nadaPesan: Record<StatusPesan, NadaStatus> = {
   menunggu: "aksen",
-  dikonfirmasi: "garis",
-  ditolak: "redup",
-  selesai: "isi",
+  dikonfirmasi: "ok",
+  ditolak: "bahaya",
+  selesai: "ok",
 };
 
 type Pesanan = {
@@ -144,6 +199,50 @@ const PESANAN_AWAL: Pesanan[] = [
     bukti: null,
     status: "menunggu",
   },
+  {
+    kode: "SWA-CONTOH-0003",
+    penyewa: "Ani Contoh",
+    unitId: "unit-07",
+    ambil: "2026-10-28",
+    kembali: "2026-11-02",
+    hari: 5,
+    total: 1125000,
+    bukti: "bukti-transfer-contoh.png",
+    status: "dikonfirmasi",
+  },
+  {
+    kode: "SWA-CONTOH-0004",
+    penyewa: "Dewi Contoh",
+    unitId: "unit-05",
+    ambil: "2026-11-12",
+    kembali: "2026-11-14",
+    hari: 2,
+    total: 900000,
+    bukti: "bukti-transfer-contoh.png",
+    status: "menunggu",
+  },
+  {
+    kode: "SWA-CONTOH-0005",
+    penyewa: "Fajar Contoh",
+    unitId: "unit-06",
+    ambil: "2026-10-20",
+    kembali: "2026-10-23",
+    hari: 3,
+    total: 2025000,
+    bukti: "bukti-transfer-contoh.png",
+    status: "selesai",
+  },
+  {
+    kode: "SWA-CONTOH-0006",
+    penyewa: "Gita Contoh",
+    unitId: "unit-01",
+    ambil: "2026-10-18",
+    kembali: "2026-10-19",
+    hari: 1,
+    total: 350000,
+    bukti: null,
+    status: "ditolak",
+  },
 ];
 
 const TAB: Tab[] = [
@@ -163,7 +262,7 @@ function selisihHari(ambil: string, kembali: string): number {
 }
 
 export default function RentalMobil() {
-  const uid = useId().replace(/:/g, "");
+  const uid = useIdBersih();
   const [tab, setTab] = useState("katalog");
   const [mobil, setMobil] = useState<Mobil[]>(MOBIL_AWAL);
   const [pesanan, setPesanan] = useState<Pesanan[]>(PESANAN_AWAL);
@@ -171,7 +270,7 @@ export default function RentalMobil() {
   const [penyewa, setPenyewa] = useState("Budi Contoh");
   const [ambil, setAmbil] = useState("2026-11-10");
   const [kembali, setKembali] = useState("2026-11-13");
-  const [nomor, setNomor] = useState(3);
+  const [nomor, setNomor] = useState(7);
   const [pesananAktif, setPesananAktif] = useState(PESANAN_AWAL[1]!.kode);
   const [kabar, setKabar] = useState("");
 
@@ -260,17 +359,20 @@ export default function RentalMobil() {
         Alur transaksi
       </JudulBagian>
 
-      <div className="overflow-x-auto">
-        <DaftarTab
-          tabs={TAB}
-          aktif={tab}
-          onGanti={setTab}
-          idPrefix={`${uid}-alur`}
-          label="Tahap transaksi rental mobil"
-        />
-      </div>
+      <DaftarTab
+        tabs={TAB}
+        aktif={tab}
+        onGanti={setTab}
+        idPrefix={`${uid}-alur`}
+        label="Tahap transaksi rental mobil"
+      />
 
-      <p aria-live="polite" className="min-h-5 text-sm text-accent-ink">
+      {/* Baris kabar hanya menyisakan ruang bila memang ada isinya — dulu
+          `min-h-5` selalu menyisakan celah kosong di bawah bilah tab. */}
+      <p
+        aria-live="polite"
+        className={kabar ? "-mt-3 text-sm text-accent-ink" : "sr-only"}
+      >
         {kabar}
       </p>
 
@@ -284,23 +386,16 @@ export default function RentalMobil() {
           pengembalian di tab berikutnya.
         </p>
 
-        <ul aria-live="polite" className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul
+          aria-live="polite"
+          className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {mobil.map((m) => (
             <li
               key={m.id}
               className="flex flex-col rounded-sm border border-line bg-bg-elev"
             >
-              <div
-                aria-hidden="true"
-                className="flex h-20 items-center justify-center border-b border-line bg-bg-soft"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px)",
-                  backgroundSize: "16px 16px",
-                }}
-              >
-                <Car className="h-7 w-7 text-ink-3" />
-              </div>
+              <SiluetKendaraan bodi={m.bodi} className="h-24 px-3" />
               <div className="flex flex-1 flex-col p-4">
                 <p className="text-sm font-semibold text-ink">{m.nama}</p>
                 <p className="mt-1 font-mono text-[11px] text-ink-3">
@@ -480,7 +575,7 @@ export default function RentalMobil() {
 
           <div
             aria-live="polite"
-            className="rounded-sm border border-dashed border-line-strong bg-bg-soft p-5"
+            className="flex flex-col rounded-sm border border-dashed border-line-strong bg-bg-soft p-5"
           >
             <p className="font-mono text-[11px] tracking-[0.16em] text-ink-3 uppercase">
               Pratinjau lampiran
@@ -501,9 +596,12 @@ export default function RentalMobil() {
                 </p>
               </>
             ) : (
-              <p className="mt-4 text-sm leading-[1.7] text-ink-3">
-                Belum ada lampiran contoh untuk {aktif.kode}.
-              </p>
+              <KeadaanKosong
+                className="flex-1"
+                ikon={<ImageOff className="h-5 w-5" aria-hidden="true" />}
+                judul="Belum ada lampiran"
+                keterangan={`Tandai lampiran contoh untuk ${aktif.kode} lewat tombol di sebelah kiri.`}
+              />
             )}
           </div>
         </div>
@@ -519,12 +617,7 @@ export default function RentalMobil() {
           unit terkait berstatus &ldquo;Disewa&rdquo; di katalog.
         </p>
 
-        <div
-          tabIndex={0}
-          role="group"
-          aria-label="Tabel pemesanan — dapat digulir mendatar"
-          className="mt-5 overflow-x-auto rounded-sm border border-line"
-        >
+        <WadahGulir label="Tabel pemesanan" className="mt-5">
           <table className="w-full min-w-[46rem] border-collapse text-sm">
             <caption className="sr-only">
               Daftar pemesanan untuk dikonfirmasi (data contoh)
@@ -590,7 +683,7 @@ export default function RentalMobil() {
                         type="button"
                         disabled={p.status !== "menunggu"}
                         onClick={() => konfirmasi(p.kode, false)}
-                        className={kelasTombolSekunder}
+                        className={kelasTombolBahaya}
                       >
                         <X className="h-3.5 w-3.5" aria-hidden="true" />
                         Tolak
@@ -602,7 +695,7 @@ export default function RentalMobil() {
               ))}
             </tbody>
           </table>
-        </div>
+        </WadahGulir>
       </PanelTab>
 
       {/* ---------------- Pengembalian ---------------- */}

@@ -44,6 +44,9 @@ export default function MediaProyek({
     ? `Tangkapan halaman prototipe UI ${nama} — rekonstruksi antarmuka untuk portofolio, bukan tangkapan layar aplikasi produksi`
     : `Tangkapan sampul proyek ${nama}`;
 
+  // Keterangan di bawah gambar sengaja dihapus: lencana "PROTOTIPE" di sudut
+  // gambar dan teks alternatifnya sudah menyampaikan hal yang sama, dan
+  // halaman prototipe sendiri masih membuka dengan penyangkalan penuh.
   return (
     <figure className="m-0">
       <div className="relative aspect-[16/9] overflow-hidden border border-line bg-bg-soft">
@@ -66,12 +69,6 @@ export default function MediaProyek({
           </span>
         ) : null}
       </div>
-
-      {prototipe ? (
-        <figcaption className="mt-2 font-mono text-[10px] leading-[1.6] tracking-[0.12em] text-ink-3 uppercase">
-          Tangkapan halaman prototipe UI — bukan aplikasi produksi
-        </figcaption>
-      ) : null}
     </figure>
   );
 }

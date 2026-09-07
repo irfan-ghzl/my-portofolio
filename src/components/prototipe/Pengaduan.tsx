@@ -1,7 +1,7 @@
 "use client";
 
 import { Bell, Inbox, Send, Share2 } from "lucide-react";
-import { useId, useState } from "react";
+import { useState } from "react";
 import {
   Bidang,
   DaftarTab,
@@ -13,6 +13,7 @@ import {
   kelasInput,
   kelasTombolSekunder,
   kelasTombolUtama,
+  useIdBersih,
 } from "./primitif";
 
 /* ---------------------------------------------------------------------------
@@ -59,11 +60,14 @@ const labelTahap: Record<Tahap, string> = {
   notifikasi: "Selesai",
 };
 
+/* "Baru" adalah antrean yang belum tersentuh (slate), dua tahap di tengah
+   sedang berjalan (amber), dan "Selesai" berakhir positif (hijau). Sebelumnya
+   justru terbalik: "Baru" paling menyala, "Selesai" paling redup. */
 const nadaTahap: Record<Tahap, NadaStatus> = {
-  pelaporan: "aksen",
-  disposisi: "garis",
-  tanggapan: "garis",
-  notifikasi: "isi",
+  pelaporan: "netral",
+  disposisi: "aksen",
+  tanggapan: "aksen",
+  notifikasi: "ok",
 };
 
 const UNIT = [
@@ -139,6 +143,58 @@ const AWAL: Pengaduan[] = [
       "13:12 — Notifikasi contoh dikirim ke pelapor.",
     ],
   },
+  {
+    id: "ADU-CONTOH-004",
+    judul: "Sampah menumpuk di titik contoh",
+    kategori: "Kebersihan",
+    lokasi: "Jalan Contoh Nomor 7, Kelurahan Contoh",
+    uraian:
+      "Laporan contoh: tumpukan sampah di bahu jalan belum terangkut sejak akhir pekan.",
+    waktu: "02 Nov 2026, 07:05",
+    tahap: "disposisi",
+    unit: "Unit Contoh — Kebersihan",
+    riwayat: [
+      "07:05 — Laporan contoh diterima sistem.",
+      "07:48 — Didisposisikan ke Unit Contoh — Kebersihan.",
+    ],
+  },
+  {
+    id: "ADU-CONTOH-005",
+    judul: "Antrean layanan surat contoh terlalu panjang",
+    kategori: "Layanan administrasi",
+    lokasi: "Kantor Contoh, Kelurahan Contoh",
+    uraian:
+      "Laporan contoh: waktu tunggu layanan surat keterangan dirasa terlalu lama pada jam sibuk.",
+    waktu: "31 Okt 2026, 11:22",
+    tahap: "tanggapan",
+    unit: "Unit Contoh — Layanan Warga",
+    tanggapan:
+      "Tanggapan contoh: loket tambahan dibuka pada jam sibuk mulai pekan depan.",
+    riwayat: [
+      "11:22 — Laporan contoh diterima sistem.",
+      "11:50 — Didisposisikan ke Unit Contoh — Layanan Warga.",
+      "15:30 — Tanggapan contoh dikirim petugas.",
+    ],
+  },
+  {
+    id: "ADU-CONTOH-006",
+    judul: "Trotoar retak di sisi contoh",
+    kategori: "Sarana umum",
+    lokasi: "Jalan Contoh Nomor 12, Kelurahan Contoh",
+    uraian:
+      "Laporan contoh: permukaan trotoar retak dan menaikkan sebagian ubinnya.",
+    waktu: "28 Okt 2026, 14:47",
+    tahap: "notifikasi",
+    unit: "Unit Contoh — Sarana Umum",
+    tanggapan:
+      "Tanggapan contoh: ubin yang terangkat sudah dipasang ulang dan diratakan.",
+    riwayat: [
+      "14:47 — Laporan contoh diterima sistem.",
+      "15:20 — Didisposisikan ke Unit Contoh — Sarana Umum.",
+      "09:40 — Tanggapan contoh dikirim petugas.",
+      "09:41 — Notifikasi contoh dikirim ke pelapor.",
+    ],
+  },
 ];
 
 const PERAN = [
@@ -147,13 +203,13 @@ const PERAN = [
 ];
 
 export default function Pengaduan() {
-  const uid = useId().replace(/:/g, "");
+  const uid = useIdBersih();
   const [peran, setPeran] = useState("masyarakat");
   const [daftar, setDaftar] = useState<Pengaduan[]>(AWAL);
   const [terpilih, setTerpilih] = useState(AWAL[0]!.id);
   const [unit, setUnit] = useState(UNIT[0]!);
   const [tanggapan, setTanggapan] = useState("");
-  const [nomorBaru, setNomorBaru] = useState(4);
+  const [nomorBaru, setNomorBaru] = useState(7);
   const [judul, setJudul] = useState("");
   const [kabar, setKabar] = useState("");
 
@@ -268,7 +324,6 @@ export default function Pengaduan() {
           id={`${uid}-peran`}
           nomor="02"
           keterangan="Dua peran yang tercatat pada deskripsi proyek. Pengalih ini hanya mengganti tampilan — tidak ada login, sesi, atau autentikasi apa pun di prototipe."
-          aksi={<LabelContoh />}
         >
           Peran
         </JudulBagian>
@@ -280,7 +335,6 @@ export default function Pengaduan() {
             onGanti={setPeran}
             idPrefix={`${uid}-peran`}
             label="Peran pengguna"
-            gaya="segmen"
           />
         </div>
 
@@ -367,12 +421,9 @@ export default function Pengaduan() {
             </form>
 
             <div className="border border-line bg-bg-elev p-5 sm:p-6">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <h3 className="text-lg font-semibold text-ink">
-                  Daftar pengaduan saya
-                </h3>
-                <LabelContoh />
-              </div>
+              <h3 className="text-lg font-semibold text-ink">
+                Daftar pengaduan saya
+              </h3>
 
               <ul aria-live="polite" className="mt-5 space-y-3">
                 {daftar.map((p) => (

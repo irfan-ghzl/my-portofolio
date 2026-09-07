@@ -5,8 +5,27 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ---------------------------------------------------------------------------
-   Token warna. Satu aksen (amber) dipakai secara disiplin di kedua tema.
-   `--accent` untuk elemen grafis, `--accent-ink` untuk teks (kontras WCAG AA).
+   Token warna.
+
+   Aksen amber dipakai secara disiplin di kedua tema, dan sekarang punya makna
+   yang sempit: **sedang berjalan / perlu perhatian**. Di sampingnya ada tiga
+   token semantik tambahan, masing-masing mengikuti pola yang sama dengan
+   `--accent` (grafis / `-ink` untuk teks / `-soft` untuk latar pil):
+
+   | Token      | Makna                        | Contoh status                     |
+   | ---------- | ---------------------------- | --------------------------------- |
+   | `--ok`     | selesai positif / tersedia   | LUNAS, SELESAI, MENANG, TERSEDIA  |
+   | `--bahaya` | negatif / gagal / tertutup   | KEDALUWARSA, TOLAK, PENUH         |
+   | `--netral` | inert / belum tersentuh      | DRAF, BARU, MENUNGGU (antre)      |
+
+   Semua pasangan `-ink` di atas latar `-soft` lolos WCAG AA (≥4.5:1) pada
+   ketiga permukaan (`--bg`, `--bg-soft`, `--bg-elev`) di kedua tema; warna
+   dasarnya sendiri (titik penanda) ≥3:1 sebagai elemen grafis non-teks.
+   Rasio terukur dicatat di komentar tiap blok.
+
+   Warna saja tidak pernah menjadi satu-satunya pembeda: setiap pil status juga
+   membawa label teks dan bentuk titik yang berbeda (lihat `PilStatus` di
+   `src/components/prototipe/primitif.tsx`).
    --------------------------------------------------------------------------- */
 
 :root {
@@ -23,6 +42,22 @@
   --accent-ink: #8a4b00;
   --accent-soft: rgba(198, 122, 0, 0.12);
   --accent-glow: rgba(198, 122, 0, 0.16);
+
+  /* Hijau teredam — ink 5,05–5,78:1, titik 3,65–4,18:1. */
+  --ok: #2f7d54;
+  --ok-ink: #256545;
+  --ok-soft: rgba(47, 125, 84, 0.14);
+
+  /* Merah teredam — ink 5,51–6,32:1, titik 3,96–4,54:1. */
+  --bahaya: #c0392b;
+  --bahaya-ink: #9b2c20;
+  --bahaya-soft: rgba(192, 57, 43, 0.12);
+
+  /* Slate teredam — ink 5,62–6,44:1, titik 3,66–4,20:1. */
+  --netral: #67707e;
+  --netral-ink: #4a5462;
+  --netral-soft: rgba(103, 112, 126, 0.14);
+
   --grid-line: rgba(20, 19, 15, 0.07);
   --grid-dot: rgba(20, 19, 15, 0.16);
   --shadow-card: 0 1px 2px rgba(20, 19, 15, 0.05);
@@ -44,6 +79,22 @@
   --accent-ink: #ffc45c;
   --accent-soft: rgba(255, 176, 32, 0.12);
   --accent-glow: rgba(255, 176, 32, 0.14);
+
+  /* Hijau teredam — ink 8,07–8,88:1, titik 4,65–5,12:1. */
+  --ok: #3f9e6b;
+  --ok-ink: #7fcba0;
+  --ok-soft: rgba(63, 158, 107, 0.14);
+
+  /* Merah teredam — ink 7,06–7,79:1, titik 4,03–4,44:1. */
+  --bahaya: #d9544a;
+  --bahaya-ink: #f2938a;
+  --bahaya-soft: rgba(217, 84, 74, 0.14);
+
+  /* Slate teredam — ink 6,85–7,58:1, titik 3,38–3,74:1. */
+  --netral: #6b7686;
+  --netral-ink: #a3adbb;
+  --netral-soft: rgba(107, 118, 134, 0.16);
+
   --grid-line: rgba(246, 244, 240, 0.06);
   --grid-dot: rgba(246, 244, 240, 0.14);
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.5);
@@ -63,6 +114,15 @@
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
+  --color-ok: var(--ok);
+  --color-ok-ink: var(--ok-ink);
+  --color-ok-soft: var(--ok-soft);
+  --color-bahaya: var(--bahaya);
+  --color-bahaya-ink: var(--bahaya-ink);
+  --color-bahaya-soft: var(--bahaya-soft);
+  --color-netral: var(--netral);
+  --color-netral-ink: var(--netral-ink);
+  --color-netral-soft: var(--netral-soft);
 
   --font-sans:
     var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
@@ -194,6 +254,27 @@ body {
     opacity 0.7s cubic-bezier(0.22, 0.61, 0.24, 1),
     transform 0.7s cubic-bezier(0.22, 0.61, 0.24, 1);
   transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* ---------------------------------------------------------------------------
+   Pita penyangkalan tipis di halaman prototipe.
+
+   Latarnya amber yang dicampur ke warna latar halaman, bukan amber penuh: ada
+   dan tidak mungkin terlewat, tapi tidak lagi mengalahkan judul halaman.
+   Opak (bukan rgba) supaya isi yang lewat di baliknya tidak menembus.
+   Kontras teks `--accent-ink` di atasnya 10,4:1 (gelap) dan 5,7:1 (terang).
+   --------------------------------------------------------------------------- */
+
+.pita-tipis {
+  background-color: color-mix(in srgb, var(--accent) 12%, var(--bg));
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 38%, var(--bg));
+}
+
+/* Pita di atas hanya ±22 px, tapi jangkar tetap tidak boleh mendarat di
+   baliknya. Nilai ini menumpuk dengan `scroll-padding-top` pada <html>, jadi
+   cukup sebesar pita ditambah sedikit ruang napas. */
+.laman-prototipe [id] {
+  scroll-margin-top: 2rem;
 }
 
 /* ---------------------------------------------------------------------------

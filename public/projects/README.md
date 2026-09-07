@@ -73,9 +73,10 @@ yaitu rekonstruksi antarmuka yang dibuat khusus untuk portofolio ini.
 
 Karena itu berlaku dua aturan berikut:
 
-1. Setiap halaman prototipe memuat pita penyangkalan permanen di puncak
-   halaman, dan tangkapan diambil dari puncak halaman sehingga pita itu selalu
-   ikut terlihat di dalam gambar.
+1. Setiap halaman prototipe memuat pita penyangkalan permanen yang melekat
+   (`position: sticky`) di puncak layar, jadi pita itu ikut terlihat di dalam
+   gambar **berapa pun posisi gulirannya** — termasuk pada tangkapan ini, yang
+   sengaja diambil setelah halaman digulir melewati kepala halaman.
 2. Proyek yang mengisi field `prototype` di `profile.ts` otomatis mendapat
    lencana **PROTOTIPE** di sudut gambar sampulnya beserta keterangan di
    bawahnya, ditambah teks alternatif yang menyebut bahwa gambar tersebut bukan
@@ -90,9 +91,16 @@ lagi tampil.
 ```bash
 npm run build
 npx http-server out -p 4321 -s          # sajikan hasil static export
-PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers node skrip-tangkap.mjs
+node skrip-tangkap.mjs
 ```
 
-Tangkapan diambil pada viewport 1600 × 900 (16 : 9), tema gelap, `scrollY = 0`,
-lalu dikonversi ke JPEG progresif tanpa metadata (EXIF/ICC) dengan target di
-bawah 300 KB per berkas.
+Tangkapan diambil pada viewport 1600 × 900 (16 : 9) dan tema gelap, lalu
+dikonversi ke JPEG progresif tanpa metadata (EXIF/ICC) dengan target di bawah
+300 KB per berkas.
+
+Sampul versi sebelumnya diambil pada `scrollY = 0`, sehingga isinya nyaris
+seluruhnya blok judul halaman: keempat kartu proyek jadi terlihat kembar dan
+tidak menunjukkan antarmuka apa pun. Sekarang `skrip-tangkap.mjs` menggulir
+dulu ke bagian yang berisi UI sungguhnya — katalog, tabel, kartu unit,
+formulir — sebelum menangkap. Sasaran gulirannya tercatat per berkas di dalam
+skrip itu.
