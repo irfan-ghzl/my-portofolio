@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; background: #070B14; font-family: "IBM Plex Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #67E8F9; text-decoration: none; } a:hover { color: #A5F3FC; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+    .disp { font-family: "Space Grotesk", "IBM Plex Sans", system-ui, sans-serif; }
+  </style>
+</helmet>
+
+<div style="width: 640px; min-height: 1700px; background: #070B14; padding: 34px; box-sizing: border-box; display: flex; flex-direction: column; gap: 26px;">
+
+  <!-- judul -->
+  <div style="display: flex; flex-direction: column; gap: 12px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <span class="mono" style="font-size: 11px; color: #67E8F9; letter-spacing: 0.16em;">ARAH A</span>
+      <div style="padding: 4px 9px; background: #102F3E; border: 1px solid rgba(34,211,238,0.4);"><span class="mono" style="font-size: 10px; font-weight: 600; color: #67E8F9; letter-spacing: 0.12em;">REKOMENDASI</span></div>
+    </div>
+    <h2 class="disp" style="margin: 0; font-size: 34px; font-weight: 700; letter-spacing: -0.025em; color: #E8EEF7; line-height: 1.1;">Infrastruktur Nasional</h2>
+    <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #94A6BF; text-wrap: pretty;">Ruang kendali untuk sistem kritikal: cyan jadi bahasa telemetri, amber turun pangkat ke peringatan, violet cuma nada gradien. Bilang: <span style="color: #E8EEF7;">“orang ini menjaga sesuatu yang tidak boleh mati.”</span></p>
+  </div>
+
+  <div style="height: 1px; background: #1E2A3D;"></div>
+
+  <!-- swatch -->
+  <div style="display: flex; flex-direction: column; gap: 14px;">
+    <span class="mono" style="font-size: 10.5px; font-weight: 600; color: #94A6BF; letter-spacing: 0.16em;">PALET — PERAN &amp; HEX</span>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #1E2A3D; background: #0D1421;">
+        <div style="width: 40px; height: 40px; background: #070B14; border: 1px solid #516A93; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #E8EEF7;">Latar</span><span class="mono" style="font-size: 11px; color: #94A6BF;">#070B14</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #1E2A3D; background: #0D1421;">
+        <div style="width: 40px; height: 40px; background: #0D1421; border: 1px solid #516A93; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #E8EEF7;">Permukaan</span><span class="mono" style="font-size: 11px; color: #94A6BF;">#0D1421</span></div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #1E2A3D; background: #0D1421;">
+        <div style="width: 40px; height: 40px; background: #1E2A3D; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #E8EEF7;">Garis</span><span class="mono" style="font-size: 11px; color: #94A6BF;">#1E2A3D</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #1E2A3D; background: #0D1421;">
+        <div style="width: 40px; height: 40px; background: #516A93; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #E8EEF7;">Garis kontrol</span><span class="mono" style="font-size: 11px; color: #94A6BF;">#516A93 · 3,59:1</span></div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #1E2A3D; background: #0D1421;">
+        <div style="width: 40px; height: 40px; background: #E8EEF7; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #E8EEF7;">Teks utama</span><span class="mono" style="font-size: 11px; color: #94A6BF;">#E8EEF7</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #1E2A3D; background: #0D1421;">
+        <div style="width: 40px; height: 40px; background: #94A6BF; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #E8EEF7;">Teks sekunder</span><span class="mono" style="font-size: 11px; color: #94A6BF;">#94A6BF</span></div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #1E2A3D; background: #0D1421;">
+        <div style="width: 40px; height: 40px; background: #6E819A; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #E8EEF7;">Teks tersier</span><span class="mono" style="font-size: 11px; color: #94A6BF;">#6E819A</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid rgba(34,211,238,0.45); background: #102F3E;">
+        <div style="width: 40px; height: 40px; background: #22D3EE; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #E8EEF7;">Cyan — PRIMER</span><span class="mono" style="font-size: 11px; color: #67E8F9;">#22D3EE</span></div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid rgba(34,211,238,0.45); background: #102F3E;">
+        <div style="width: 40px; height: 40px; background: #67E8F9; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #E8EEF7;">Cyan — teks</span><span class="mono" style="font-size: 11px; color: #67E8F9;">#67E8F9</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid rgba(251,191,36,0.4); background: #2E2C21;">
+        <div style="width: 40px; height: 40px; background: #FBBF24; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #E8EEF7;">Amber — peringatan</span><span class="mono" style="font-size: 11px; color: #FBBF24;">#FBBF24</span></div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #1E2A3D; background: #0D1421;">
+        <div style="width: 40px; height: 40px; background: #34D399; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #E8EEF7;">Sukses</span><span class="mono" style="font-size: 11px; color: #34D399;">#34D399</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #1E2A3D; background: #0D1421;">
+        <div style="width: 40px; height: 40px; background: #FB7185; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #E8EEF7;">Bahaya</span><span class="mono" style="font-size: 11px; color: #FB7185;">#FB7185</span></div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #1E2A3D; background: #0D1421;">
+        <div style="width: 40px; height: 40px; background: #818CF8; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #E8EEF7;">Violet — gradien</span><span class="mono" style="font-size: 11px; color: #A5B4FC;">#818CF8</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #1E2A3D; background: #0D1421;">
+        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #0A1F2A, #13182B); border: 1px solid #1E2A3D; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #E8EEF7;">Mesh (puncak)</span><span class="mono" style="font-size: 11px; color: #94A6BF;">#0A1F2A / #13182B</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 1px; background: #1E2A3D;"></div>
+
+  <!-- kontras -->
+  <div style="display: flex; flex-direction: column; gap: 12px;">
+    <div style="display: flex; align-items: baseline; justify-content: space-between;">
+      <span class="mono" style="font-size: 10.5px; font-weight: 600; color: #94A6BF; letter-spacing: 0.16em;">KONTRAS TERUKUR — WCAG 2.1</span>
+      <span class="mono" style="font-size: 10.5px; color: #34D399; letter-spacing: 0.08em;">12/12 LULUS AA</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; border: 1px solid #1E2A3D; background: #0D1421;">
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 62px; gap: 0; padding: 8px 12px; border-bottom: 1px solid #1E2A3D; background: #0A1120;">
+        <span class="mono" style="font-size: 10px; color: #6E819A; letter-spacing: 0.1em;">PASANGAN</span>
+        <span class="mono" style="font-size: 10px; color: #6E819A; letter-spacing: 0.1em; text-align: right;">RASIO</span>
+        <span class="mono" style="font-size: 10px; color: #6E819A; letter-spacing: 0.1em; text-align: right;">MIN</span>
+      </div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 62px; padding: 7px 12px; border-bottom: 1px solid rgba(30,42,61,0.6);"><span class="mono" style="font-size: 11px; color: #E8EEF7;">#E8EEF7 · latar</span><span class="mono" style="font-size: 11px; color: #34D399; text-align: right;">16,87:1</span><span class="mono" style="font-size: 11px; color: #6E819A; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 62px; padding: 7px 12px; border-bottom: 1px solid rgba(30,42,61,0.6);"><span class="mono" style="font-size: 11px; color: #E8EEF7;">#E8EEF7 · permukaan</span><span class="mono" style="font-size: 11px; color: #34D399; text-align: right;">15,81:1</span><span class="mono" style="font-size: 11px; color: #6E819A; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 62px; padding: 7px 12px; border-bottom: 1px solid rgba(30,42,61,0.6);"><span class="mono" style="font-size: 11px; color: #E8EEF7;">#E8EEF7 · puncak mesh</span><span class="mono" style="font-size: 11px; color: #34D399; text-align: right;">14,49:1</span><span class="mono" style="font-size: 11px; color: #6E819A; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 62px; padding: 7px 12px; border-bottom: 1px solid rgba(30,42,61,0.6);"><span class="mono" style="font-size: 11px; color: #E8EEF7;">#94A6BF · permukaan</span><span class="mono" style="font-size: 11px; color: #34D399; text-align: right;">7,43:1</span><span class="mono" style="font-size: 11px; color: #6E819A; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 62px; padding: 7px 12px; border-bottom: 1px solid rgba(30,42,61,0.6);"><span class="mono" style="font-size: 11px; color: #E8EEF7;">#6E819A · permukaan</span><span class="mono" style="font-size: 11px; color: #34D399; text-align: right;">4,63:1</span><span class="mono" style="font-size: 11px; color: #6E819A; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 62px; padding: 7px 12px; border-bottom: 1px solid rgba(30,42,61,0.6);"><span class="mono" style="font-size: 11px; color: #E8EEF7;">#67E8F9 · permukaan</span><span class="mono" style="font-size: 11px; color: #34D399; text-align: right;">12,72:1</span><span class="mono" style="font-size: 11px; color: #6E819A; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 62px; padding: 7px 12px; border-bottom: 1px solid rgba(30,42,61,0.6);"><span class="mono" style="font-size: 11px; color: #E8EEF7;">#070B14 · tombol cyan</span><span class="mono" style="font-size: 11px; color: #34D399; text-align: right;">10,89:1</span><span class="mono" style="font-size: 11px; color: #6E819A; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 62px; padding: 7px 12px; border-bottom: 1px solid rgba(30,42,61,0.6);"><span class="mono" style="font-size: 11px; color: #E8EEF7;">#FBBF24 · permukaan</span><span class="mono" style="font-size: 11px; color: #34D399; text-align: right;">11,04:1</span><span class="mono" style="font-size: 11px; color: #6E819A; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 62px; padding: 7px 12px; border-bottom: 1px solid rgba(30,42,61,0.6);"><span class="mono" style="font-size: 11px; color: #E8EEF7;">#34D399 · pil selesai</span><span class="mono" style="font-size: 11px; color: #34D399; text-align: right;">7,39:1</span><span class="mono" style="font-size: 11px; color: #6E819A; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 62px; padding: 7px 12px; border-bottom: 1px solid rgba(30,42,61,0.6);"><span class="mono" style="font-size: 11px; color: #E8EEF7;">#FB7185 · pil gagal</span><span class="mono" style="font-size: 11px; color: #34D399; text-align: right;">5,68:1</span><span class="mono" style="font-size: 11px; color: #6E819A; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 62px; padding: 7px 12px; border-bottom: 1px solid rgba(30,42,61,0.6);"><span class="mono" style="font-size: 11px; color: #E8EEF7;">#818CF8 · permukaan</span><span class="mono" style="font-size: 11px; color: #34D399; text-align: right;">6,18:1</span><span class="mono" style="font-size: 11px; color: #6E819A; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 62px; padding: 7px 12px;"><span class="mono" style="font-size: 11px; color: #E8EEF7;">#516A93 · garis kontrol</span><span class="mono" style="font-size: 11px; color: #34D399; text-align: right;">3,59:1</span><span class="mono" style="font-size: 11px; color: #6E819A; text-align: right;">3,0</span></div>
+    </div>
+    <span style="font-size: 11.5px; color: #6E819A; line-height: 1.55;">Tidak ada hex yang perlu digeser — semua nilai awal lolos AA apa adanya.</span>
+  </div>
+
+  <div style="height: 1px; background: #1E2A3D;"></div>
+
+  <!-- catatan -->
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;">
+    <div style="padding: 14px; border: 1px solid #1E2A3D; background: #0D1421; display: flex; flex-direction: column; gap: 7px;">
+      <span class="mono" style="font-size: 10px; color: #6E819A; letter-spacing: 0.12em;">MODE TERANG</span>
+      <span style="font-size: 13px; font-weight: 600; color: #FBBF24;">Gelap-dulu</span>
+      <span style="font-size: 12px; color: #94A6BF; line-height: 1.55;">Cyan #22D3EE cuma 1,68:1 di atas kertas terang. Mode terang bisa, tapi primernya harus jadi teal gelap #155E75 (6,76:1) — hue-nya tetap, temperaturnya berubah.</span>
+    </div>
+    <div style="padding: 14px; border: 1px solid #1E2A3D; background: #0D1421; display: flex; flex-direction: column; gap: 7px;">
+      <span class="mono" style="font-size: 10px; color: #6E819A; letter-spacing: 0.12em;">TIPOGRAFI</span>
+      <span style="font-size: 13px; font-weight: 600; color: #E8EEF7;">Space Grotesk + IBM Plex</span>
+      <span style="font-size: 12px; color: #94A6BF; line-height: 1.55;">Display geometrik untuk judul, Plex Sans untuk teks, Plex Mono untuk angka dan label telemetri. Menggantikan Inter yang sekarang dipakai.</span>
+    </div>
+  </div>
+
+  <div style="padding: 14px; border-left: 2px solid #22D3EE; background: rgba(34,211,238,0.06); display: flex; flex-direction: column; gap: 6px;">
+    <span class="mono" style="font-size: 10px; color: #67E8F9; letter-spacing: 0.12em;">KENAPA INI MELAWAN “MATI”</span>
+    <span style="font-size: 12.5px; color: #94A6BF; line-height: 1.6;">Masalahnya bukan gelapnya — tapi tak adanya kontras suhu. Di sini biru-dingin jadi dasar, cyan jadi dingin-terang, amber jadi hangat yang langka. Begitu amber muncul, artinya sesuatu. Mesh gradien memberi kedalaman tanpa menyentuh kontras teks.</span>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

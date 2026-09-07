@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; background: #070B14; font-family: "IBM Plex Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #67E8F9; text-decoration: none; }
+    a:hover { color: #A5F3FC; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace; }
+    .disp { font-family: "Space Grotesk", "IBM Plex Sans", system-ui, sans-serif; }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 1280px; min-height: 1700px; background: #070B14; overflow: hidden;">
+
+  <!-- gradient mesh + grid: kedalaman tanpa mengorbankan kontras teks -->
+  <div style="position: absolute; inset: 0; background: radial-gradient(900px 520px at 8% -6%, rgba(34,211,238,0.16), transparent 62%), radial-gradient(760px 480px at 104% 12%, rgba(129,140,248,0.14), transparent 60%), radial-gradient(700px 700px at 60% 96%, rgba(34,211,238,0.07), transparent 65%);"></div>
+  <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(30,42,61,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(30,42,61,0.5) 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(900px 620px at 30% 0%, #000 10%, transparent 78%); -webkit-mask-image: radial-gradient(900px 620px at 30% 0%, #000 10%, transparent 78%);"></div>
+
+  <div style="position: relative; display: flex; flex-direction: column;">
+
+    <!-- ================= NAV ================= -->
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: 22px 56px; border-bottom: 1px solid #1E2A3D;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 30px; height: 30px; border: 1px solid #516A93; display: flex; align-items: center; justify-content: center; background: rgba(34,211,238,0.08);">
+          <span class="mono" style="font-size: 11px; font-weight: 600; color: #67E8F9; letter-spacing: 0.04em;">AIG</span>
+        </div>
+        <span class="disp" style="font-size: 15px; font-weight: 600; color: #E8EEF7; letter-spacing: -0.01em;">Ahmad Irfan Ghazali</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 28px;">
+        <span style="font-size: 13.5px; color: #94A6BF;">Tentang</span>
+        <span style="font-size: 13.5px; color: #94A6BF;">Pengalaman</span>
+        <span style="font-size: 13.5px; color: #E8EEF7;">Proyek</span>
+        <span style="font-size: 13.5px; color: #94A6BF;">Keahlian</span>
+        <span style="font-size: 13.5px; color: #94A6BF;">Kontak</span>
+        <div style="display: flex; align-items: center; gap: 7px; padding: 6px 11px; border: 1px solid #1E2A3D; background: #102F3E;">
+          <svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><circle cx="4" cy="4" r="3.5" fill="#67E8F9"></circle></svg>
+          <span class="mono" style="font-size: 10.5px; font-weight: 500; color: #67E8F9; letter-spacing: 0.1em;">AKTIF</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= HERO ================= -->
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) 452px; gap: 56px; padding: 72px 56px 64px 56px; align-items: start;">
+
+      <div style="display: flex; flex-direction: column; gap: 26px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="width: 26px; height: 1px; background: #22D3EE;"></div>
+          <span class="mono" style="font-size: 11px; font-weight: 500; color: #67E8F9; letter-spacing: 0.16em;">JAKARTA · INA DIGITAL EDU</span>
+        </div>
+
+        <h1 class="disp" style="margin: 0; font-size: 58px; line-height: 1.06; font-weight: 700; letter-spacing: -0.028em; color: #E8EEF7; text-wrap: balance;">Software&nbsp;Engineer<span style="color: #94A6BF;"> —&nbsp;</span><span style="background: linear-gradient(96deg, #67E8F9 12%, #A5B4FC 88%); -webkit-background-clip: text; background-clip: text; color: transparent;">Backend Go &amp; Infrastruktur Skala Besar</span></h1>
+
+        <p style="margin: 0; max-width: 560px; font-size: 18px; line-height: 1.62; color: #94A6BF; text-wrap: pretty;">Membangun sistem identitas dan lisensi untuk puluhan juta akun pendidikan di Indonesia.</p>
+
+        <div style="display: flex; align-items: center; gap: 14px; padding-top: 6px;">
+          <div style="display: flex; align-items: center; gap: 9px; padding: 13px 22px; background: #22D3EE;">
+            <span style="font-size: 14.5px; font-weight: 600; color: #070B14; letter-spacing: -0.005em;">Lihat proyek</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#070B14" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"></path><path d="M12 5l7 7-7 7"></path></svg>
+          </div>
+          <div style="display: flex; align-items: center; gap: 9px; padding: 13px 20px; border: 1px solid #516A93;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E8EEF7" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="M7 11l5 5 5-5"></path><path d="M4 20h16"></path></svg>
+            <span style="font-size: 14.5px; font-weight: 500; color: #E8EEF7;">Unduh CV</span>
+          </div>
+          <span class="mono" style="font-size: 11.5px; color: #94A6BF; letter-spacing: 0.06em; padding-left: 8px;">2023 → sekarang · belajar.id</span>
+        </div>
+      </div>
+
+      <!-- panel telemetri -->
+      <div style="border: 1px solid #1E2A3D; background: linear-gradient(180deg, #0D1421 0%, #0A1120 100%); box-shadow: 0 24px 60px -30px rgba(0,0,0,0.9);">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid #1E2A3D;">
+          <span class="mono" style="font-size: 10.5px; font-weight: 600; color: #94A6BF; letter-spacing: 0.14em;">TOPOLOGI PLATFORM</span>
+          <span class="mono" style="font-size: 10.5px; color: #67E8F9; letter-spacing: 0.1em;">belajar.id</span>
+        </div>
+
+        <div style="padding: 20px 18px 18px 18px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between;">
+            <span class="mono" style="font-size: 11px; color: #94A6BF; letter-spacing: 0.1em;">POD BERJALAN</span>
+            <span class="mono" style="font-size: 13px; font-weight: 600; color: #E8EEF7;">86 / 20 layanan</span>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 5px; width: 100%;"><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span><span style="width: 14px; height: 14px; background: rgba(34,211,238,0.72);"></span></div>
+          <span style="font-size: 11.5px; color: #94A6BF; line-height: 1.5;">Tiap kotak satu pod. Backend Go — gRPC, PostgreSQL, Kubernetes.</span>
+        </div>
+
+        <div style="height: 1px; background: #1E2A3D;"></div>
+
+        <div style="padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+          <span class="mono" style="font-size: 10.5px; font-weight: 600; color: #94A6BF; letter-spacing: 0.14em;">PIPELINE PROVISIONING</span>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="flex-grow: 1; padding: 9px 0; text-align: center; border: 1px solid #1E2A3D; background: #0A1120;"><span class="mono" style="font-size: 11.5px; font-weight: 500; color: #E8EEF7;">CDC</span></div>
+            <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="#516A93" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M0 5h13"></path><path d="M10 2l3 3-3 3"></path></svg>
+            <div style="flex-grow: 1; padding: 9px 0; text-align: center; border: 1px solid #22D3EE; background: #102F3E;"><span class="mono" style="font-size: 11.5px; font-weight: 500; color: #67E8F9;">Pub/Sub</span></div>
+            <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="#516A93" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M0 5h13"></path><path d="M10 2l3 3-3 3"></path></svg>
+            <div style="flex-grow: 1; padding: 9px 0; text-align: center; border: 1px solid #1E2A3D; background: #0A1120;"><span class="mono" style="font-size: 11.5px; font-weight: 500; color: #E8EEF7;">Consumer</span></div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px;">
+            <div style="padding: 10px 0; text-align: center; background: rgba(34,211,238,0.10); border-bottom: 2px solid #22D3EE;"><span class="mono" style="font-size: 11px; color: #67E8F9;">01</span></div>
+            <div style="padding: 10px 0; text-align: center; background: rgba(34,211,238,0.10); border-bottom: 2px solid #22D3EE;"><span class="mono" style="font-size: 11px; color: #67E8F9;">02</span></div>
+            <div style="padding: 10px 0; text-align: center; background: rgba(34,211,238,0.10); border-bottom: 2px solid #22D3EE;"><span class="mono" style="font-size: 11px; color: #67E8F9;">03</span></div>
+            <div style="padding: 10px 0; text-align: center; background: rgba(34,211,238,0.10); border-bottom: 2px solid #22D3EE;"><span class="mono" style="font-size: 11px; color: #67E8F9;">04</span></div>
+            <div style="padding: 10px 0; text-align: center; background: rgba(34,211,238,0.10); border-bottom: 2px solid #22D3EE;"><span class="mono" style="font-size: 11px; color: #67E8F9;">05</span></div>
+            <div style="padding: 10px 0; text-align: center; background: rgba(34,211,238,0.10); border-bottom: 2px solid #22D3EE;"><span class="mono" style="font-size: 11px; color: #67E8F9;">06</span></div>
+            <div style="padding: 10px 0; text-align: center; background: rgba(34,211,238,0.10); border-bottom: 2px solid #22D3EE;"><span class="mono" style="font-size: 11px; color: #67E8F9;">07</span></div>
+          </div>
+          <span style="font-size: 11.5px; color: #94A6BF; line-height: 1.5;">Consumer terpisah untuk 7 jenjang pendidikan.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= STATS BAND ================= -->
+    <div style="border-top: 1px solid #1E2A3D; border-bottom: 1px solid #1E2A3D; background: linear-gradient(180deg, rgba(13,20,33,0.9), rgba(7,11,20,0.9));">
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; padding: 0 56px;">
+
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 40px 32px 40px 0;">
+          <div style="width: 34px; height: 2px; background: #22D3EE;"></div>
+          <div style="display: flex; align-items: baseline; gap: 8px;">
+            <span class="mono" style="font-size: 54px; font-weight: 500; line-height: 1; letter-spacing: -0.035em; color: #E8EEF7;">30,7</span>
+            <span class="mono" style="font-size: 19px; font-weight: 500; color: #67E8F9;">juta</span>
+          </div>
+          <span style="font-size: 13.5px; color: #94A6BF; line-height: 1.45;">Akun diprovisioning<br><span style="color: #6E819A;">dari ±50,7 juta data</span></span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 40px 32px; border-left: 1px solid #1E2A3D;">
+          <div style="width: 34px; height: 2px; background: #22D3EE;"></div>
+          <div style="display: flex; align-items: baseline; gap: 8px;">
+            <span class="mono" style="font-size: 54px; font-weight: 500; line-height: 1; letter-spacing: -0.035em; color: #E8EEF7;">4,66</span>
+            <span class="mono" style="font-size: 19px; font-weight: 500; color: #67E8F9;">juta</span>
+          </div>
+          <span style="font-size: 13.5px; color: #94A6BF; line-height: 1.45;">Akun dimigrasi lisensinya<br><span style="color: #6E819A;">CLI batch, replay idempoten</span></span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 40px 32px; border-left: 1px solid #1E2A3D;">
+          <div style="width: 34px; height: 2px; background: #22D3EE;"></div>
+          <span class="mono" style="font-size: 54px; font-weight: 500; line-height: 1; letter-spacing: -0.035em; color: #E8EEF7;">20</span>
+          <span style="font-size: 13.5px; color: #94A6BF; line-height: 1.45;">Layanan didukung<br><span style="color: #6E819A;">86 pod di Kubernetes</span></span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 40px 0 40px 32px; border-left: 1px solid #1E2A3D;">
+          <div style="width: 34px; height: 2px; background: #22D3EE;"></div>
+          <span class="mono" style="font-size: 54px; font-weight: 500; line-height: 1; letter-spacing: -0.035em; color: #E8EEF7;">10</span>
+          <span style="font-size: 13.5px; color: #94A6BF; line-height: 1.45;">CLI internal dibangun<br><span style="color: #6E819A;">Google Admin SDK</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= KARTU PROYEK ================= -->
+    <div style="padding: 60px 56px 20px 56px; display: flex; flex-direction: column; gap: 24px;">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <span class="mono" style="font-size: 11px; font-weight: 600; color: #94A6BF; letter-spacing: 0.16em;">PROYEK TERPILIH</span>
+        <span class="mono" style="font-size: 11px; color: #67E8F9; letter-spacing: 0.08em;">01 / 06</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 428px minmax(0, 1fr); gap: 0; border: 1px solid #1E2A3D; background: #0D1421;">
+
+        <div style="padding: 24px; border-right: 1px solid #1E2A3D; background: linear-gradient(155deg, rgba(34,211,238,0.07), rgba(129,140,248,0.05));">
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="padding: 12px 14px; border: 1px solid #22D3EE; background: #102F3E; text-align: center;">
+              <span class="mono" style="font-size: 12px; font-weight: 500; color: #67E8F9;">Backend Go / Echo</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;">
+              <div style="padding: 10px; border: 1px solid #1E2A3D; background: #0A1120; text-align: center;"><span style="font-size: 11.5px; color: #E8EEF7;">Katalog</span></div>
+              <div style="padding: 10px; border: 1px solid #1E2A3D; background: #0A1120; text-align: center;"><span style="font-size: 11.5px; color: #E8EEF7;">CRM leads</span></div>
+              <div style="padding: 10px; border: 1px solid #1E2A3D; background: #0A1120; text-align: center;"><span style="font-size: 11.5px; color: #E8EEF7;">Invoice</span></div>
+              <div style="padding: 10px; border: 1px solid #1E2A3D; background: #0A1120; text-align: center;"><span style="font-size: 11.5px; color: #E8EEF7;">Portal peserta</span></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; padding: 2px 0;">
+              <div style="flex-grow: 1; height: 1px; background: #1E2A3D;"></div>
+              <span class="mono" style="font-size: 10px; color: #6E819A; letter-spacing: 0.12em;">INTEGRASI</span>
+              <div style="flex-grow: 1; height: 1px; background: #1E2A3D;"></div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px;">
+              <div style="padding: 8px 0; text-align: center; background: rgba(129,140,248,0.12);"><span class="mono" style="font-size: 10.5px; color: #A5B4FC;">Fonnte</span></div>
+              <div style="padding: 8px 0; text-align: center; background: rgba(129,140,248,0.12);"><span class="mono" style="font-size: 10.5px; color: #A5B4FC;">Midtrans</span></div>
+              <div style="padding: 8px 0; text-align: center; background: rgba(129,140,248,0.12);"><span class="mono" style="font-size: 10.5px; color: #A5B4FC;">Gemini</span></div>
+              <div style="padding: 8px 0; text-align: center; background: rgba(129,140,248,0.12);"><span class="mono" style="font-size: 10.5px; color: #A5B4FC;">OCR</span></div>
+            </div>
+            <span style="font-size: 11px; color: #6E819A; line-height: 1.5;">Diagram arsitektur digambar tangan sebagai SVG — bukan tangkapan layar produksi.</span>
+          </div>
+        </div>
+
+        <div style="padding: 28px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;">
+            <h3 class="disp" style="margin: 0; font-size: 25px; font-weight: 600; letter-spacing: -0.02em; color: #E8EEF7; line-height: 1.2;">Sistem Full-Stack Manajemen Program</h3>
+            <div style="display: flex; align-items: center; gap: 6px; padding: 5px 10px; border: 1px solid #516A93; flex-shrink: 0;">
+              <span class="mono" style="font-size: 10px; color: #94A6BF; letter-spacing: 0.12em;">PROTOTIPE</span>
+            </div>
+          </div>
+
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.68; color: #94A6BF; text-wrap: pretty;">Sistem full-stack mencakup katalog, CRM leads, invoice, hingga portal peserta, dengan integrasi WhatsApp Gateway (Fonnte), payment gateway (Midtrans), chatbot AI (Gemini), dan OCR self-hosted untuk ekstraksi dokumen. Didahului penyusunan PRD dengan 51 functional requirement dan 9 modul.</p>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 7px;">
+            <span class="mono" style="font-size: 11.5px; color: #E8EEF7; padding: 5px 10px; border: 1px solid #1E2A3D; background: #0A1120;">Go/Echo</span>
+            <span class="mono" style="font-size: 11.5px; color: #E8EEF7; padding: 5px 10px; border: 1px solid #1E2A3D; background: #0A1120;">React</span>
+            <span class="mono" style="font-size: 11.5px; color: #E8EEF7; padding: 5px 10px; border: 1px solid #1E2A3D; background: #0A1120;">TypeScript</span>
+            <span class="mono" style="font-size: 11.5px; color: #E8EEF7; padding: 5px 10px; border: 1px solid #1E2A3D; background: #0A1120;">PostgreSQL</span>
+          </div>
+
+          <div style="flex-grow: 1;"></div>
+
+          <div style="display: flex; align-items: center; gap: 20px; padding-top: 4px; border-top: 1px solid #1E2A3D; margin-top: 4px;">
+            <div style="display: flex; align-items: center; gap: 7px; padding-top: 14px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#67E8F9" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="1"></rect><path d="M8 21h8"></path></svg>
+              <span style="font-size: 13.5px; font-weight: 500; color: #67E8F9;">Lihat prototipe</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 7px; padding-top: 14px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A6BF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14L21 3"></path><path d="M21 9V3h-6"></path><path d="M19 14v6H4V5h6"></path></svg>
+              <span style="font-size: 13.5px; color: #94A6BF;">Detail arsitektur</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= STATUS PILLS ================= -->
+    <div style="padding: 36px 56px 56px 56px; display: flex; flex-direction: column; gap: 18px;">
+      <span class="mono" style="font-size: 11px; font-weight: 600; color: #94A6BF; letter-spacing: 0.16em;">STATUS — DIPAKAI DI PROTOTIPE &amp; TIMELINE</span>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 8px; padding: 7px 13px; background: #122F32; border: 1px solid rgba(52,211,153,0.35);">
+          <svg width="9" height="9" viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="4.5" fill="#34D399"></circle></svg>
+          <span class="mono" style="font-size: 11.5px; font-weight: 500; color: #34D399; letter-spacing: 0.06em;">SELESAI</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; padding: 7px 13px; background: #1A323F; border: 1px solid rgba(34,211,238,0.4);">
+          <svg width="9" height="9" viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="4.2" fill="none" stroke="#67E8F9" stroke-width="1.4"></circle><circle cx="5" cy="5" r="1.7" fill="#67E8F9"></circle></svg>
+          <span class="mono" style="font-size: 11.5px; font-weight: 500; color: #67E8F9; letter-spacing: 0.06em;">BERJALAN</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; padding: 7px 13px; background: #202837; border: 1px solid #1E2A3D;">
+          <svg width="9" height="9" viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="4.1" fill="none" stroke="#94A6BF" stroke-width="1.5"></circle></svg>
+          <span class="mono" style="font-size: 11.5px; font-weight: 500; color: #94A6BF; letter-spacing: 0.06em;">MENUNGGU</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; padding: 7px 13px; background: #2E212F; border: 1px solid rgba(251,113,133,0.35);">
+          <svg width="9" height="9" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0.6L9.4 5 5 9.4 0.6 5z" fill="#FB7185"></path></svg>
+          <span class="mono" style="font-size: 11.5px; font-weight: 500; color: #FB7185; letter-spacing: 0.06em;">GAGAL</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; padding: 7px 13px; background: #2E2C21; border: 1px solid rgba(251,191,36,0.35);">
+          <svg width="9" height="9" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0.5L9.6 9H0.4z" fill="#FBBF24"></path></svg>
+          <span class="mono" style="font-size: 11.5px; font-weight: 500; color: #FBBF24; letter-spacing: 0.06em;">PERINGATAN</span>
+        </div>
+      </div>
+      <span style="font-size: 12.5px; color: #6E819A; line-height: 1.55; max-width: 760px;">Warna tidak pernah jadi satu-satunya pembeda: tiap pil membawa label teks dan bentuk titik yang berbeda. Amber turun pangkat — hanya untuk peringatan, bukan lagi aksen umum.</span>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

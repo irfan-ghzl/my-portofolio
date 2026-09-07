@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #0A0A1B; font-family: "DM Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #A5B4FC; text-decoration: none; } a:hover { color: #C7D2FE; }
+    .disp { font-family: "Sora", "DM Sans", system-ui, sans-serif; }
+    .mono { font-family: "DM Mono", ui-monospace, monospace; }
+  </style>
+</helmet>
+
+<div style="width: 640px; min-height: 1700px; background: #0A0A1B; padding: 34px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px;">
+
+  <div style="display: flex; flex-direction: column; gap: 12px;">
+    <span class="mono" style="font-size: 11px; color: #A5B4FC; letter-spacing: 0.14em;">ARAH C</span>
+    <h2 class="disp" style="margin: 0; font-size: 34px; font-weight: 700; letter-spacing: -0.028em; color: #EDEDFB; line-height: 1.1;">Indigo Depth</h2>
+    <p style="margin: 0; font-size: 14.5px; line-height: 1.62; color: #9B9BC4; text-wrap: pretty;">Indigo pekat, permukaan berlapis kaca, cyan sebagai pendamping. Paling modern, paling mudah dijual. Bilang: <span style="color: #EDEDFB;">“saya membangun produk.”</span> Risikonya: terlihat seperti produk siapa saja.</p>
+  </div>
+
+  <div style="height: 1px; background: #232350;"></div>
+
+  <div style="display: flex; flex-direction: column; gap: 14px;">
+    <span class="mono" style="font-size: 11px; color: #9B9BC4; letter-spacing: 0.14em;">PALET — PERAN &amp; HEX</span>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #232350; border-radius: 12px; background: #12122E;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: #0A0A1B; border: 1px solid #5D5DB8; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #EDEDFB;">Latar</span><span class="mono" style="font-size: 11px; color: #9B9BC4;">#0A0A1B</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #232350; border-radius: 12px; background: #12122E;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: #12122E; border: 1px solid #5D5DB8; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #EDEDFB;">Permukaan</span><span class="mono" style="font-size: 11px; color: #9B9BC4;">#12122E</span></div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #232350; border-radius: 12px; background: #12122E;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: #232350; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #EDEDFB;">Garis</span><span class="mono" style="font-size: 11px; color: #9B9BC4;">#232350</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #232350; border-radius: 12px; background: #12122E;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: #5D5DB8; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #EDEDFB;">Garis kontrol</span><span class="mono" style="font-size: 11px; color: #9B9BC4;">#5D5DB8 · 3,47:1</span></div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #232350; border-radius: 12px; background: #12122E;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: #EDEDFB; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #EDEDFB;">Teks utama</span><span class="mono" style="font-size: 11px; color: #9B9BC4;">#EDEDFB</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #232350; border-radius: 12px; background: #12122E;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: #9B9BC4; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #EDEDFB;">Teks sekunder</span><span class="mono" style="font-size: 11px; color: #9B9BC4;">#9B9BC4</span></div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid rgba(129,140,248,0.4); border-radius: 12px; background: #27294B;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: #818CF8; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #EDEDFB;">Indigo — PRIMER</span><span class="mono" style="font-size: 11px; color: #A5B4FC;">#818CF8</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid rgba(129,140,248,0.4); border-radius: 12px; background: #27294B;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: #A5B4FC; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #EDEDFB;">Indigo — teks</span><span class="mono" style="font-size: 11px; color: #A5B4FC;">#A5B4FC</span></div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #232350; border-radius: 12px; background: #12122E;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: #22D3EE; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #EDEDFB;">Cyan — sekunder</span><span class="mono" style="font-size: 11px; color: #22D3EE;">#22D3EE</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #232350; border-radius: 12px; background: #12122E;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: #4ADE80; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #EDEDFB;">Sukses</span><span class="mono" style="font-size: 11px; color: #4ADE80;">#4ADE80</span></div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #232350; border-radius: 12px; background: #12122E;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: #F87171; flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #EDEDFB;">Bahaya</span><span class="mono" style="font-size: 11px; color: #F87171;">#F87171</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #232350; border-radius: 12px; background: #12122E;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(140deg, #818CF8, #22D3EE); flex-shrink: 0;"></div>
+        <div style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12.5px; color: #EDEDFB;">Gradien tanda</span><span class="mono" style="font-size: 11px; color: #9B9BC4;">#818CF8 → #22D3EE</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 1px; background: #232350;"></div>
+
+  <div style="display: flex; flex-direction: column; gap: 12px;">
+    <div style="display: flex; align-items: baseline; justify-content: space-between;">
+      <span class="mono" style="font-size: 11px; color: #9B9BC4; letter-spacing: 0.14em;">KONTRAS TERUKUR — WCAG 2.1</span>
+      <span class="mono" style="font-size: 11px; color: #4ADE80;">12/12 LULUS AA</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; border: 1px solid #232350; border-radius: 12px; background: #12122E; overflow: hidden;">
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 56px; padding: 8px 14px; border-bottom: 1px solid #232350; background: #0A0A1B;">
+        <span class="mono" style="font-size: 10.5px; color: #9B9BC4; letter-spacing: 0.08em;">PASANGAN</span>
+        <span class="mono" style="font-size: 10.5px; color: #9B9BC4; letter-spacing: 0.08em; text-align: right;">RASIO</span>
+        <span class="mono" style="font-size: 10.5px; color: #9B9BC4; letter-spacing: 0.08em; text-align: right;">MIN</span>
+      </div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 56px; padding: 7px 14px; border-bottom: 1px solid rgba(35,35,80,0.7);"><span class="mono" style="font-size: 11px; color: #EDEDFB;">#EDEDFB · latar</span><span class="mono" style="font-size: 11px; color: #4ADE80; text-align: right;">16,89:1</span><span class="mono" style="font-size: 11px; color: #9B9BC4; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 56px; padding: 7px 14px; border-bottom: 1px solid rgba(35,35,80,0.7);"><span class="mono" style="font-size: 11px; color: #EDEDFB;">#EDEDFB · permukaan</span><span class="mono" style="font-size: 11px; color: #4ADE80; text-align: right;">15,72:1</span><span class="mono" style="font-size: 11px; color: #9B9BC4; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 56px; padding: 7px 14px; border-bottom: 1px solid rgba(35,35,80,0.7);"><span class="mono" style="font-size: 11px; color: #EDEDFB;">#9B9BC4 · permukaan</span><span class="mono" style="font-size: 11px; color: #4ADE80; text-align: right;">6,84:1</span><span class="mono" style="font-size: 11px; color: #9B9BC4; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 56px; padding: 7px 14px; border-bottom: 1px solid rgba(35,35,80,0.7);"><span class="mono" style="font-size: 11px; color: #EDEDFB;">#A5B4FC · permukaan</span><span class="mono" style="font-size: 11px; color: #4ADE80; text-align: right;">9,15:1</span><span class="mono" style="font-size: 11px; color: #9B9BC4; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 56px; padding: 7px 14px; border-bottom: 1px solid rgba(35,35,80,0.7);"><span class="mono" style="font-size: 11px; color: #EDEDFB;">#818CF8 · permukaan</span><span class="mono" style="font-size: 11px; color: #4ADE80; text-align: right;">6,11:1</span><span class="mono" style="font-size: 11px; color: #9B9BC4; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 56px; padding: 7px 14px; border-bottom: 1px solid rgba(35,35,80,0.7);"><span class="mono" style="font-size: 11px; color: #EDEDFB;">#0A0A1B · tombol indigo</span><span class="mono" style="font-size: 11px; color: #4ADE80; text-align: right;">6,57:1</span><span class="mono" style="font-size: 11px; color: #9B9BC4; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 56px; padding: 7px 14px; border-bottom: 1px solid rgba(35,35,80,0.7);"><span class="mono" style="font-size: 11px; color: #EDEDFB;">#22D3EE · permukaan</span><span class="mono" style="font-size: 11px; color: #4ADE80; text-align: right;">10,09:1</span><span class="mono" style="font-size: 11px; color: #9B9BC4; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 56px; padding: 7px 14px; border-bottom: 1px solid rgba(35,35,80,0.7);"><span class="mono" style="font-size: 11px; color: #EDEDFB;">#4ADE80 · permukaan</span><span class="mono" style="font-size: 11px; color: #4ADE80; text-align: right;">10,46:1</span><span class="mono" style="font-size: 11px; color: #9B9BC4; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 56px; padding: 7px 14px; border-bottom: 1px solid rgba(35,35,80,0.7);"><span class="mono" style="font-size: 11px; color: #EDEDFB;">#F87171 · permukaan</span><span class="mono" style="font-size: 11px; color: #4ADE80; text-align: right;">6,59:1</span><span class="mono" style="font-size: 11px; color: #9B9BC4; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 56px; padding: 7px 14px; border-bottom: 1px solid rgba(35,35,80,0.7);"><span class="mono" style="font-size: 11px; color: #EDEDFB;">#A5B4FC · pil berjalan</span><span class="mono" style="font-size: 11px; color: #4ADE80; text-align: right;">7,00:1</span><span class="mono" style="font-size: 11px; color: #9B9BC4; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 56px; padding: 7px 14px; border-bottom: 1px solid rgba(35,35,80,0.7);"><span class="mono" style="font-size: 11px; color: #EDEDFB;">#F87171 · pil gagal</span><span class="mono" style="font-size: 11px; color: #4ADE80; text-align: right;">5,47:1</span><span class="mono" style="font-size: 11px; color: #9B9BC4; text-align: right;">4,5</span></div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 74px 56px; padding: 7px 14px;"><span class="mono" style="font-size: 11px; color: #EDEDFB;">#5D5DB8 · garis kontrol</span><span class="mono" style="font-size: 11px; color: #4ADE80; text-align: right;">3,47:1</span><span class="mono" style="font-size: 11px; color: #9B9BC4; text-align: right;">3,0</span></div>
+    </div>
+    <span style="font-size: 11.5px; color: #9B9BC4; line-height: 1.55;">Semua hex awal lolos AA. Garis kontrol dinaikkan dari #232350 (1,33:1) ke #5D5DB8 khusus untuk batas tombol dan input.</span>
+  </div>
+
+  <div style="height: 1px; background: #232350;"></div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;">
+    <div style="padding: 14px; border: 1px solid #232350; border-radius: 12px; background: #12122E; display: flex; flex-direction: column; gap: 7px;">
+      <span class="mono" style="font-size: 10.5px; color: #9B9BC4; letter-spacing: 0.1em;">MODE TERANG</span>
+      <span style="font-size: 13px; font-weight: 600; color: #A5B4FC;">Gelap-dulu</span>
+      <span style="font-size: 12px; color: #9B9BC4; line-height: 1.55;">Indigo #818CF8 cuma 2,75:1 di atas kertas — mode terang butuh #4338CA (7,28:1). Efek kaca dan bayangan juga kehilangan sebagian besar dayanya di latar terang.</span>
+    </div>
+    <div style="padding: 14px; border: 1px solid #232350; border-radius: 12px; background: #12122E; display: flex; flex-direction: column; gap: 7px;">
+      <span class="mono" style="font-size: 10.5px; color: #9B9BC4; letter-spacing: 0.1em;">TIPOGRAFI</span>
+      <span style="font-size: 13px; font-weight: 600; color: #EDEDFB;">Sora + DM Sans + DM Mono</span>
+      <span style="font-size: 12px; color: #9B9BC4; line-height: 1.55;">Sora untuk judul, DM Sans untuk teks, DM Mono untuk angka. Rapi, tapi ini juga kombinasi yang paling sering dipakai bersama palet indigo.</span>
+    </div>
+  </div>
+
+  <div style="padding: 14px; border-left: 2px solid #818CF8; border-radius: 0 10px 10px 0; background: rgba(129,140,248,0.08); display: flex; flex-direction: column; gap: 6px;">
+    <span class="mono" style="font-size: 10.5px; color: #A5B4FC; letter-spacing: 0.1em;">TRADE-OFF</span>
+    <span style="font-size: 12.5px; color: #9B9BC4; line-height: 1.6;">Paling cepat terlihat “selesai”, dan paling aman. Tapi indigo + kaca + gradien adalah tampilan bawaan produk SaaS 2020-an: cerita infrastruktur publik skala nasional tidak terbaca dari warnanya, cuma dari teksnya.</span>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

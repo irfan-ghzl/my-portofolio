@@ -1,0 +1,86 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "title": "A — Infrastruktur Nasional · UI",
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 1700
+    },
+    {
+      "file": "PaletA.dc.html",
+      "title": "A — Palet & kontras",
+      "x": 1400,
+      "y": 0,
+      "w": 640,
+      "h": 1700
+    },
+    {
+      "file": "ArahB.dc.html",
+      "title": "B — Warm Editorial · UI",
+      "x": 0,
+      "y": 1840,
+      "w": 1280,
+      "h": 1700
+    },
+    {
+      "file": "PaletB.dc.html",
+      "title": "B — Palet, kontras & mode terang",
+      "x": 1400,
+      "y": 1840,
+      "w": 640,
+      "h": 1700
+    },
+    {
+      "file": "ArahC.dc.html",
+      "title": "C — Indigo Depth · UI",
+      "x": 0,
+      "y": 3680,
+      "w": 1280,
+      "h": 1700
+    },
+    {
+      "file": "PaletC.dc.html",
+      "title": "C — Palet & kontras",
+      "x": 1400,
+      "y": 3680,
+      "w": 640,
+      "h": 1700
+    },
+    {
+      "file": "Perbandingan.dc.html",
+      "title": "Perbandingan — tiga hero berdampingan",
+      "x": 0,
+      "y": 5520,
+      "w": 2040,
+      "h": 940
+    }
+  ],
+  "annotations": [
+    {
+      "id": "cara-baca",
+      "x": 0,
+      "y": -230,
+      "w": 900,
+      "text": "Tiga arah visual untuk portofolio Ahmad Irfan Ghazali.\n\nTiap baris = satu arah: kiri UI penuh (hero, stats band, kartu proyek, pil status), kanan palet + rasio kontras terukur.\nBaris terakhir menaruh ketiga hero berdampingan.\n\nSemua konten faktual dari CV. Ini eksplorasi konsep — repo my-portofolio tidak disentuh."
+    },
+    {
+      "id": "diagnosis",
+      "x": 940,
+      "y": -230,
+      "w": 700,
+      "text": "Kenapa situs sekarang terasa \"mati\":\nsatu aksen amber + abu-abu = tidak ada kontras suhu, tidak ada hue kedua, tidak ada kedalaman.\n\nKetiga arah menjawabnya dengan cara berbeda — bukan dengan menambah warna, tapi dengan memberi tiap warna satu pekerjaan."
+    },
+    {
+      "id": "rekomendasi",
+      "x": 2100,
+      "y": 0,
+      "w": 460,
+      "text": "Rekomendasi: A.\n\nCyan dingin sebagai primer bikin angka terbaca seperti telemetri, bukan seperti dekorasi. Amber jadi langka, jadi berarti. Violet cuma nada gradien — kedalaman tanpa hue ketiga yang bersaing.\n\nB paling hangat tapi paling jauh dari cerita skala nasional. C paling aman tapi paling mirip SaaS mana pun."
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}
