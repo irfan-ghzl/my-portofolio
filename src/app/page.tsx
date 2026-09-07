@@ -1,9 +1,8 @@
 import About from "@/components/About";
-import Certifications from "@/components/Certifications";
 import Contact from "@/components/Contact";
-import Education from "@/components/Education";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
 import Hero from "@/components/Hero";
+import Kredensial from "@/components/Kredensial";
 import Projects from "@/components/Projects";
 import ScrollReveal from "@/components/ScrollReveal";
 import SiteFooter from "@/components/SiteFooter";
@@ -16,7 +15,7 @@ export default function Home() {
     <>
       <a
         href="#konten"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:bg-accent focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-[#0a0a0b]"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:bg-accent focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-accent-kontras"
       >
         Lompat ke konten utama
       </a>
@@ -31,8 +30,7 @@ export default function Home() {
         <ExperienceTimeline />
         <Projects />
         <Skills />
-        <Education />
-        <Certifications />
+        <Kredensial />
         <Contact />
       </main>
 

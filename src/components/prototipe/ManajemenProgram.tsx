@@ -40,7 +40,7 @@ const INTEGRASI = [
     nama: "Midtrans",
     peran: "Payment gateway",
     status: "Sandbox",
-    nada: "aksen" as const,
+    nada: "perhatian" as const,
     Ikon: Wallet,
   },
   {
@@ -162,8 +162,8 @@ const LEADS: {
    Dua tahap di tengah masih berjalan (amber), "baru" belum tersentuh (slate). */
 const nadaTahap: Record<TahapId, NadaStatus> = {
   baru: "netral",
-  dihubungi: "aksen",
-  kualifikasi: "aksen",
+  dihubungi: "perhatian",
+  kualifikasi: "perhatian",
   menang: "ok",
 };
 
@@ -199,7 +199,7 @@ const INVOICE: Invoice[] = [
     program: "Program Contoh Alfa",
     jatuhTempo: "18 Nov 2026",
     status: "Menunggu",
-    nada: "aksen",
+    nada: "perhatian",
     metode: "Midtrans — kartu (sandbox)",
     rincian: [
       { label: "Biaya program", nilai: 1800000 },
@@ -614,7 +614,7 @@ export default function ManajemenProgram() {
                     {[
                       ["Pendaftaran", "ok"],
                       ["Verifikasi dokumen", "ok"],
-                      ["Pembayaran", "aksen"],
+                      ["Pembayaran", "perhatian"],
                       ["Kelas dimulai", "netral"],
                     ].map(([label, nada], i) => (
                       <li key={label} className="flex items-center gap-3">
@@ -629,7 +629,7 @@ export default function ManajemenProgram() {
                           <PilStatus nada={nada as NadaStatus}>
                             {nada === "ok"
                               ? "Selesai"
-                              : nada === "aksen"
+                              : nada === "perhatian"
                                 ? "Berjalan"
                                 : "Menunggu"}
                           </PilStatus>

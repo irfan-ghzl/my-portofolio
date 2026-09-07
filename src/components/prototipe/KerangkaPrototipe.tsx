@@ -32,7 +32,7 @@ export default function KerangkaPrototipe({
     <div className="laman-prototipe">
       <a
         href="#konten"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-10 focus:left-3 focus:z-[60] focus:bg-accent focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-[#0a0a0b]"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-10 focus:left-3 focus:z-[60] focus:bg-accent focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-accent-kontras"
       >
         Lompat ke konten utama
       </a>

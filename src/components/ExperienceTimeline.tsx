@@ -14,26 +14,35 @@ export default function ExperienceTimeline() {
             style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
             className="relative pl-8 sm:pl-12"
           >
+            {/* Peran yang sedang berjalan = amber `--perhatian`, bukan sian:
+                sian sekarang milik identitas, amber milik "sedang berjalan". */}
             <span
               aria-hidden="true"
+              style={
+                exp.current
+                  ? ({
+                      "--denyut-warna": "var(--perhatian-soft)",
+                    } as React.CSSProperties)
+                  : undefined
+              }
               className={`absolute top-[1.15rem] left-0 h-[15px] w-[15px] rounded-full border-2 ${
                 exp.current
-                  ? "denyut border-accent bg-accent"
+                  ? "denyut border-perhatian bg-perhatian"
                   : "border-line-strong bg-bg"
               }`}
             />
 
-            <article className="border border-line bg-bg-elev p-6 shadow-[var(--shadow-card)] transition duration-200 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[var(--shadow-lift)] sm:p-8">
+            <article className="border border-line bg-bg-elev p-6 shadow-[var(--shadow-card)] transition duration-200 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[var(--shadow-lift)] sm:p-7">
               <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[11px] tracking-[0.18em] text-ink-3 uppercase">
                 <span>{exp.period}</span>
                 {exp.current ? (
-                  <span className="border border-accent/50 bg-accent-soft px-2 py-0.5 text-accent-ink">
+                  <span className="border border-perhatian/50 bg-perhatian-soft px-2 py-0.5 text-perhatian-ink">
                     Aktif
                   </span>
                 ) : null}
               </div>
 
-              <h3 className="mt-4 text-xl font-semibold text-ink sm:text-2xl">
+              <h3 className="mt-3.5 text-xl font-semibold text-ink sm:text-2xl">
                 {exp.role}
               </h3>
               <p className="mt-2 font-mono text-sm text-accent-ink">
@@ -44,7 +53,7 @@ export default function ExperienceTimeline() {
                 <span className="text-ink-3">{exp.location}</span>
               </p>
 
-              <ul className="mt-6 max-w-[68ch] space-y-4">
+              <ul className="mt-5 max-w-[68ch] space-y-3">
                 {exp.bullets.map((bullet) => (
                   <li
                     key={bullet.slice(0, 48)}
@@ -62,7 +71,7 @@ export default function ExperienceTimeline() {
               {/* Lampiran teknis untuk peran ini — dibaca sebagai bukti kerja,
                   bukan hiasan. */}
               {adaDiagram(exp.diagram) && exp.diagramCaption ? (
-                <div className="mt-8">
+                <div className="mt-6">
                   <Diagram
                     diagram={exp.diagram}
                     caption={exp.diagramCaption}

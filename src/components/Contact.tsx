@@ -47,6 +47,8 @@ export default function Contact() {
       index="08"
       description="Terbuka untuk diskusi seputar backend Go, infrastruktur, dan sistem berskala besar."
     >
+      {/* Dua kolom, bukan empat: di empat kolom sel-nya tinggal ±160 px dan
+          alamat surel terpotong jadi "aigirfan.g@gmail.co / m". */}
       <ul className="grid gap-px border border-line-strong bg-line-strong sm:grid-cols-2">
         {kontak.map(({ label, value, href, Icon, external }, i) => (
           <li
@@ -59,7 +61,7 @@ export default function Contact() {
               {...(external
                 ? { target: "_blank", rel: "noreferrer noopener" }
                 : {})}
-              className="group flex h-full items-start gap-5 bg-bg p-6 transition-colors hover:bg-bg-soft sm:p-7"
+              className="group flex h-full items-start gap-4 bg-bg p-5 transition-colors hover:bg-bg-soft sm:p-6"
             >
               <Icon
                 className="mt-1 h-4 w-4 shrink-0 text-accent transition-transform duration-200 group-hover:translate-x-0.5"
@@ -69,7 +71,7 @@ export default function Contact() {
                 <span className="block font-mono text-[11px] tracking-[0.22em] text-ink-3 uppercase">
                   {label}
                 </span>
-                <span className="mt-2 block font-mono text-sm break-all text-ink group-hover:text-accent-ink">
+                <span className="mt-2 block font-mono text-[0.8125rem] break-words text-ink group-hover:text-accent-ink">
                   {value}
                 </span>
               </span>
@@ -78,7 +80,7 @@ export default function Contact() {
         ))}
       </ul>
 
-      <p className="mt-8 inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.18em] text-ink-3 uppercase">
+      <p className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.18em] text-ink-3 uppercase">
         <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
         {identity.location}
       </p>

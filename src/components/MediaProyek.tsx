@@ -1,8 +1,4 @@
-"use client";
-
-import Image from "next/image";
-import { useState, type ReactNode } from "react";
-import { kandidatGambar } from "@/lib/gambar";
+import { asetPublik, varianTerang } from "@/lib/gambar";
 
 type MediaProyekProps = {
   /** Path gambar sampul di `public/`. Kosong/`null` → langsung pakai cadangan. */
@@ -16,17 +12,31 @@ type MediaProyekProps = {
    */
   prototipe?: boolean;
   /**
-   * Yang ditampilkan bila gambar sampul tidak ada atau gagal dimuat:
-   * diagram arsitektur proyek, atau placeholder tipografis.
+   * Yang ditampilkan bila gambar sampul tidak ada: diagram arsitektur proyek,
+   * atau placeholder tipografis.
    */
-  cadangan: ReactNode;
+  cadangan: React.ReactNode;
 };
 
 /**
- * Slot media kartu proyek.
+ * Slot media kartu proyek — dengan sampul per tema.
  *
- * Urutan: gambar sampul → (varian ekstensi lain) → cadangan. Tidak pernah
- * menyisakan gambar rusak atau kotak kosong.
+ * Sebelumnya hanya ada satu tangkapan bertema gelap. Di mode terang, empat
+ * persegi panjang hitam menganga di tengah halaman kertas: jelas bukan pilihan
+ * desain, melainkan aset yang lupa dibuat. Sekarang tiap sampul punya dua
+ * berkas — `<nama>.jpg` (gelap) dan `<nama>-terang.jpg` — keduanya ditangkap
+ * ulang dari halaman prototipe kita sendiri oleh `skrip-tangkap.mjs`.
+ *
+ * Pertukarannya dilakukan CSS, lewat dua custom property yang dibaca oleh
+ * `.sampul-proyek` di `globals.css`. Alasannya: tema situs ini dikendalikan
+ * kelas `dark` pada <html> (bukan `prefers-color-scheme`), jadi `<picture
+ * media>` tidak akan ikut berubah saat tombol tema ditekan. Memakai latar CSS
+ * juga berarti peramban hanya mengunduh varian yang benar-benar tampil —
+ * sepasang `<img>` yang saling disembunyikan akan mengunduh keduanya.
+ *
+ * Karena elemennya bukan `<img>`, aksesibilitasnya dijaga eksplisit dengan
+ * `role="img"` + `aria-label` yang isinya sama persis dengan teks alternatif
+ * sebelumnya.
  */
 export default function MediaProyek({
   image,
@@ -34,36 +44,31 @@ export default function MediaProyek({
   prototipe = false,
   cadangan,
 }: MediaProyekProps) {
-  const kandidat = image ? kandidatGambar(image) : [];
-  const [indeks, setIndeks] = useState(0);
-  const berkas = kandidat[indeks];
-
-  if (!berkas) return <>{cadangan}</>;
+  if (!image) return <>{cadangan}</>;
 
   const alt = prototipe
     ? `Tangkapan halaman prototipe UI ${nama} — rekonstruksi antarmuka untuk portofolio, bukan tangkapan layar aplikasi produksi`
     : `Tangkapan sampul proyek ${nama}`;
 
-  // Keterangan di bawah gambar sengaja dihapus: lencana "PROTOTIPE" di sudut
-  // gambar dan teks alternatifnya sudah menyampaikan hal yang sama, dan
-  // halaman prototipe sendiri masih membuka dengan penyangkalan penuh.
   return (
     <figure className="m-0">
       <div className="relative aspect-[16/9] overflow-hidden border border-line bg-bg-soft">
-        <Image
-          src={berkas}
-          alt={alt}
-          fill
-          unoptimized
-          sizes="(min-width: 1024px) 900px, 100vw"
-          className="object-cover"
-          onError={() => setIndeks((n) => n + 1)}
+        <div
+          role="img"
+          aria-label={alt}
+          className="sampul-proyek absolute inset-0"
+          style={
+            {
+              "--sampul-gelap": `url("${asetPublik(image)}")`,
+              "--sampul-terang": `url("${asetPublik(varianTerang(image))}")`,
+            } as React.CSSProperties
+          }
         />
 
         {prototipe ? (
           <span
             aria-hidden="true"
-            className="absolute top-0 left-0 bg-accent px-2.5 py-1 font-mono text-[10px] font-bold tracking-[0.2em] text-[#0a0a0b] uppercase"
+            className="absolute top-0 left-0 bg-perhatian px-2.5 py-1 font-mono text-[10px] font-bold tracking-[0.2em] text-perhatian-kontras uppercase"
           >
             Prototipe
           </span>

@@ -4,7 +4,7 @@ import Section from "./Section";
 export default function About() {
   return (
     <Section id="tentang" title="Tentang" index="02">
-      <div className="max-w-[68ch] space-y-7">
+      <div className="max-w-[68ch] space-y-6">
         {about.map((paragraf, i) => (
           <p
             key={paragraf.slice(0, 40)}

@@ -2,6 +2,15 @@ import { ArrowUpRight, Code2, Mail } from "lucide-react";
 import { identity } from "@/data/profile";
 import FotoProfil from "./FotoProfil";
 
+/**
+ * Kepala halaman.
+ *
+ * Urutan DOM = urutan baca di ponsel: baris status, nama (h1), peran, ringkasan,
+ * tombol, baru potret. Sebelumnya potret dipaksa `order-1` di layar sempit,
+ * sehingga hal pertama yang terlihat di layar 390 px adalah monogram "AIG" dan
+ * namanya terdorong ke bawah lipatan. Sekarang tidak ada `order-*` sama sekali;
+ * di ≥1024 px potret pindah ke kolom kanan lewat grid, bukan lewat urutan.
+ */
 export default function Hero() {
   return (
     <section
@@ -11,17 +20,20 @@ export default function Hero() {
     >
       <div
         aria-hidden="true"
-        className="cahaya-aksen pointer-events-none absolute inset-0 -z-10"
+        className="jaring-hero pointer-events-none absolute inset-0 -z-10"
       />
 
-      <div className="relative mx-auto grid max-w-6xl gap-y-10 px-5 pt-40 pb-16 sm:px-8 sm:pt-48 sm:pb-24 lg:grid-cols-[minmax(0,1fr)_13.5rem] lg:items-start lg:gap-x-14 lg:pt-56 lg:pb-32">
-        <div className="order-2 lg:order-1">
+      <div className="relative mx-auto grid max-w-6xl gap-y-10 px-5 pt-28 pb-14 sm:px-8 sm:pt-36 sm:pb-20 lg:grid-cols-[minmax(0,1fr)_13.5rem] lg:items-start lg:gap-x-14 lg:pt-44 lg:pb-24">
+        <div>
           {/* Baris meta atas — mono, seperti header dokumen teknis. */}
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[11px] tracking-[0.22em] text-ink-3 uppercase">
-            <span className="inline-flex items-center gap-2 text-accent-ink">
+            {/* "Terbuka untuk kolaborasi" adalah ketersediaan, bukan sesuatu
+                yang sedang berjalan — jadi hijau `--ok`, bukan amber. */}
+            <span className="inline-flex items-center gap-2 text-ok-ink">
               <span
                 aria-hidden="true"
-                className="denyut inline-block h-1.5 w-1.5 rounded-full bg-accent"
+                className="denyut inline-block h-1.5 w-1.5 rounded-full bg-ok"
+                style={{ "--denyut-warna": "var(--ok-soft)" } as React.CSSProperties}
               />
               Terbuka untuk kolaborasi
             </span>
@@ -34,12 +46,12 @@ export default function Hero() {
 
           <h1
             id="beranda-judul"
-            className="mt-10 text-display font-semibold text-ink text-balance"
+            className="mt-8 text-display font-semibold text-ink text-balance"
           >
             {identity.name}
           </h1>
 
-          <div className="mt-8 grid gap-x-12 gap-y-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+          <div className="mt-7 grid gap-x-12 gap-y-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
             <p className="border-l-2 border-accent pl-5 text-lead font-medium text-ink">
               {identity.headline}
             </p>
@@ -48,10 +60,10 @@ export default function Hero() {
             </p>
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center gap-3">
+          <div className="mt-9 flex flex-wrap items-center gap-3">
             <a
               href={`mailto:${identity.email}`}
-              className="group inline-flex items-center gap-2 rounded-none bg-accent px-5 py-3 font-mono text-xs tracking-[0.14em] text-[#0a0a0b] uppercase transition-transform duration-200 hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2 rounded-none bg-accent px-5 py-3 font-mono text-xs tracking-[0.14em] text-accent-kontras uppercase transition-transform duration-200 hover:-translate-y-0.5"
             >
               <Mail className="h-4 w-4" aria-hidden="true" />
               Hubungi saya
@@ -78,7 +90,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="order-1 lg:order-2 lg:pt-2">
+        <div className="lg:pt-2">
           <FotoProfil src={identity.photo} nama={identity.name} />
         </div>
       </div>

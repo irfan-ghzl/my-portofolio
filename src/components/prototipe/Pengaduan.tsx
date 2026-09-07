@@ -65,8 +65,8 @@ const labelTahap: Record<Tahap, string> = {
    justru terbalik: "Baru" paling menyala, "Selesai" paling redup. */
 const nadaTahap: Record<Tahap, NadaStatus> = {
   pelaporan: "netral",
-  disposisi: "aksen",
-  tanggapan: "aksen",
+  disposisi: "perhatian",
+  tanggapan: "perhatian",
   notifikasi: "ok",
 };
 
@@ -439,7 +439,12 @@ export default function Pengaduan() {
                       }`}
                     >
                       <span className="flex flex-wrap items-center justify-between gap-2">
-                        <span className="font-mono text-[11px] text-ink-3">
+                        {/* Di kartu terpilih, latarnya sudah ber-tint sian; teks
+                            `--ink-3` di atasnya jatuh ke 4,49:1, jadi naik satu
+                            tingkat ke `--ink-2`. */}
+                        <span
+                          className={`font-mono text-[11px] ${p.id === terpilih ? "text-ink-2" : "text-ink-3"}`}
+                        >
                           {p.id}
                         </span>
                         <PilStatus nada={nadaTahap[p.tahap]}>
@@ -449,7 +454,9 @@ export default function Pengaduan() {
                       <span className="mt-1.5 block text-sm font-medium text-ink">
                         {p.judul}
                       </span>
-                      <span className="mt-1 block font-mono text-[11px] text-ink-3">
+                      <span
+                        className={`mt-1 block font-mono text-[11px] ${p.id === terpilih ? "text-ink-2" : "text-ink-3"}`}
+                      >
                         {p.kategori} · {p.waktu}
                       </span>
                       {p.tanggapan ? (

@@ -141,7 +141,7 @@ const labelUnit: Record<StatusUnit, string> = {
    untuk yang tertutup sementara. */
 const nadaUnit: Record<StatusUnit, NadaStatus> = {
   tersedia: "ok",
-  disewa: "aksen",
+  disewa: "perhatian",
   perawatan: "bahaya",
 };
 
@@ -158,7 +158,7 @@ const labelPesan: Record<StatusPesan, string> = {
    jadi hanya itu yang amber. Dikonfirmasi dan selesai berakhir positif → hijau;
    ditolak → merah. */
 const nadaPesan: Record<StatusPesan, NadaStatus> = {
-  menunggu: "aksen",
+  menunggu: "perhatian",
   dikonfirmasi: "ok",
   ditolak: "bahaya",
   selesai: "ok",

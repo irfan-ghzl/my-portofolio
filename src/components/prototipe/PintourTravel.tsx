@@ -152,7 +152,7 @@ const PAKET: Paket[] = [
  */
 function nadaKursi(sisa: number): NadaStatus {
   if (sisa === 0) return "bahaya";
-  return sisa <= 5 ? "aksen" : "ok";
+  return sisa <= 5 ? "perhatian" : "ok";
 }
 
 export default function PintourTravel() {

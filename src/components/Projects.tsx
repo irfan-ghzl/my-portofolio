@@ -20,14 +20,25 @@ function labelRepo(url: string): string {
 export default function Projects() {
   return (
     <Section id="proyek" title="Proyek" index="04">
-      {/* Satu kolom: diagram arsitektur butuh lebar penuh agar tetap terbaca. */}
-      <ol className="space-y-8 sm:space-y-10">
+      {/* Dua kolom di ≥1024 px. Sebelumnya satu kolom selebar halaman, dan
+          konsekuensinya sampul 16:9 setinggi ±650 px per kartu: bagian Proyek
+          sendirian memakan 4.600 px, hampir separuh halaman. Diagram tetap
+          terbaca karena bingkainya sudah punya area gulir mendatar sendiri.
+
+          Rongga di bawah dua proyek tanpa sampul (CRM, Fasisi) tidak ditutup
+          dengan memampatkan kisi, melainkan dengan membiarkan placeholder
+          tipografisnya memanjang mengisi tinggi kartu — jadi ruang itu menjadi
+          bidang yang disengaja, bukan lubang. */}
+      <ol className="grid gap-6 lg:grid-cols-2">
         {projects.map((project, i) => {
           const diagram =
             adaDiagram(project.diagram) && project.diagramCaption
               ? { kunci: project.diagram, caption: project.diagramCaption }
               : null;
           const punyaSampul = Boolean(project.image);
+          // Kartu tanpa sampul DAN tanpa diagram jatuh ke placeholder; hanya
+          // placeholder itu yang boleh memanjang mengisi sisa tinggi kartu.
+          const pakaiPlaceholder = !punyaSampul && !diagram;
 
           return (
             <li
@@ -36,8 +47,9 @@ export default function Projects() {
               style={
                 { "--reveal-delay": `${(i % 2) * 90}ms` } as React.CSSProperties
               }
+              className="min-w-0"
             >
-              <article className="group relative flex flex-col border border-line bg-bg-elev p-7 shadow-[var(--shadow-card)] transition duration-200 hover:border-accent/60 hover:shadow-[var(--shadow-lift)] sm:p-8">
+              <article className="group relative flex h-full flex-col border border-line bg-bg-elev p-6 shadow-[var(--shadow-card)] transition duration-200 hover:border-accent/60 hover:shadow-[var(--shadow-lift)] sm:p-7">
                 {/* Aksen tipis di tepi atas, muncul saat hover. */}
                 <span
                   aria-hidden="true"
@@ -57,12 +69,12 @@ export default function Projects() {
                 </div>
 
                 {project.description ? (
-                  <p className="mt-4 max-w-[68ch] text-[0.9375rem] leading-[1.7] text-ink-2">
+                  <p className="mt-3.5 max-w-[68ch] text-[0.9375rem] leading-[1.7] text-ink-2">
                     {project.description}
                   </p>
                 ) : null}
 
-                <ul className="mt-6 flex flex-wrap gap-2">
+                <ul className="mt-5 flex flex-wrap gap-2">
                   {project.tech.map((tech) => (
                     <li
                       key={tech}
@@ -77,7 +89,7 @@ export default function Projects() {
                     arsitektur, kalau tidak juga placeholder tipografis.
                     Bila sampulnya ada, diagram dipindah ke <details> di bawah
                     supaya keduanya tetap tersedia tanpa memanjangkan kartu. */}
-                <div className="mt-8">
+                <div className={pakaiPlaceholder ? "mt-6 flex-1" : "mt-6"}>
                   <MediaProyek
                     image={project.image}
                     nama={project.name}
@@ -114,7 +126,7 @@ export default function Projects() {
                 ) : null}
 
                 {project.prototype || (project.repos && project.repos.length > 0) ? (
-                  <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-3 border-t border-line pt-5">
+                  <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-3 border-t border-line pt-4">
                     {project.prototype ? (
                       <p>
                         <Link

@@ -17,7 +17,7 @@ export default function PlaceholderProyek({ nama }: { nama: string }) {
   return (
     <div
       aria-hidden="true"
-      className="flex h-20 items-stretch border border-line bg-bg-soft sm:h-24"
+      className="flex h-full min-h-20 items-stretch border border-line bg-bg-soft sm:min-h-24"
     >
       <span className="w-[3px] shrink-0 bg-accent" />
 

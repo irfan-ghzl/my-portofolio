@@ -43,6 +43,14 @@ export type Stat = {
   value: string;
   /** Keterangan singkat di bawah angka */
   label: string;
+  /**
+   * Satu baris konteks pendukung di bawah label — dari mana angka itu berasal.
+   *
+   * Isinya **bukan klaim baru**: tiap kalimat adalah potongan langsung dari
+   * butir pengalaman di `experiences` yang sudah ada di bawah, hanya dipotong
+   * supaya muat satu baris. Sifatnya opsional dan murni penjelas.
+   */
+  context?: string;
 };
 
 export type Experience = {
@@ -143,10 +151,30 @@ export const about: string[] = [
 ];
 
 export const stats: Stat[] = [
-  { value: "30,7 juta", label: "Akun diprovisioning" },
-  { value: "4,66 juta", label: "Akun dimigrasi lisensinya" },
-  { value: "20", label: "Layanan didukung (86 pod)" },
-  { value: "10", label: "CLI internal dibangun" },
+  {
+    value: "30,7 juta",
+    label: "Akun diprovisioning",
+    context:
+      "Dari ±50,7 juta data pendidik, tenaga kependidikan, dan peserta didik",
+  },
+  {
+    value: "4,66 juta",
+    label: "Akun dimigrasi lisensinya",
+    context:
+      "Lewat CLI batch dengan pacing adaptif terhadap kuota Licensing API dan replay idempoten",
+  },
+  {
+    value: "20",
+    label: "Layanan didukung (86 pod)",
+    context:
+      "Backend Go (gRPC, PostgreSQL, Kubernetes) penopang layanan belajar.id",
+  },
+  {
+    value: "10",
+    label: "CLI internal dibangun",
+    context:
+      "Berbasis Google Admin SDK dengan domain-wide delegation untuk audit storage dan pelaporan lisensi",
+  },
 ];
 
 export const experiences: Experience[] = [

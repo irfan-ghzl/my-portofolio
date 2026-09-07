@@ -13,9 +13,10 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 /* ---------------------------------------------------------------------------
    Potongan UI kecil yang dipakai ulang oleh keempat prototipe.
-   Semuanya memakai token desain yang sudah ada (aksen amber, tiga token
-   semantik di `globals.css`, Inter, JetBrains Mono, tema gelap/terang) supaya
-   prototipe terasa satu keluarga dengan portofolionya.
+   Semuanya memakai token desain yang sudah ada (aksen sian sebagai identitas,
+   amber `--perhatian` untuk "sedang berjalan", plus tiga token semantik lain di
+   `globals.css`, Inter, JetBrains Mono, tema gelap/terang) supaya prototipe
+   terasa satu keluarga dengan portofolionya.
    --------------------------------------------------------------------------- */
 
 /**
@@ -27,7 +28,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
  */
 export function LabelContoh({ children }: { children?: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-1.5 border border-accent/50 bg-accent-soft px-2 py-0.5 font-mono text-[10px] tracking-[0.16em] text-accent-ink uppercase">
+    <span className="inline-flex items-center gap-1.5 border border-perhatian/50 bg-perhatian-soft px-2 py-0.5 font-mono text-[10px] tracking-[0.16em] text-perhatian-ink uppercase">
       <FlaskConical className="h-3 w-3" aria-hidden="true" />
       {children ?? "Data contoh"}
     </span>
@@ -46,17 +47,17 @@ export function LabelContoh({ children }: { children?: ReactNode }) {
    monokrom maupun bagi pengguna dengan buta warna.
    --------------------------------------------------------------------------- */
 
-export type NadaStatus = "aksen" | "ok" | "bahaya" | "netral";
+export type NadaStatus = "perhatian" | "ok" | "bahaya" | "netral";
 
 const kelasStatus: Record<NadaStatus, string> = {
-  aksen: "border-accent/60 bg-accent-soft text-accent-ink",
+  perhatian: "border-perhatian/60 bg-perhatian-soft text-perhatian-ink",
   ok: "border-ok/55 bg-ok-soft text-ok-ink",
   bahaya: "border-bahaya/55 bg-bahaya-soft text-bahaya-ink",
   netral: "border-netral/55 bg-netral-soft text-netral-ink",
 };
 
 const ikonStatus: Record<NadaStatus, typeof Check> = {
-  aksen: Clock,
+  perhatian: Clock,
   ok: Check,
   bahaya: X,
   netral: Circle,
@@ -164,11 +165,11 @@ export function Bidang({
 
 /** Kelas dasar untuk input/select/textarea agar seragam di semua prototipe. */
 export const kelasInput =
-  "w-full border border-line-strong bg-bg-elev px-3 py-2 text-sm text-ink placeholder:text-ink-3/70 transition-colors hover:border-accent/60 disabled:cursor-not-allowed disabled:border-line disabled:bg-bg-soft disabled:text-ink-3";
+  "w-full border border-line-strong bg-bg-elev px-3 py-2 text-sm text-ink placeholder:text-ink-3 transition-colors hover:border-accent/60 disabled:cursor-not-allowed disabled:border-line disabled:bg-bg-soft disabled:text-ink-3";
 
 /** Tombol utama (aksi berwarna aksen). */
 export const kelasTombolUtama =
-  "inline-flex items-center justify-center gap-2 border border-accent bg-accent px-4 py-2 font-mono text-xs tracking-[0.12em] uppercase text-[#0a0a0b] transition-opacity hover:opacity-85 disabled:cursor-not-allowed disabled:border-line-strong disabled:bg-transparent disabled:text-ink-3 disabled:opacity-100";
+  "inline-flex items-center justify-center gap-2 border border-accent bg-accent px-4 py-2 font-mono text-xs tracking-[0.12em] uppercase text-accent-kontras transition-opacity hover:opacity-85 disabled:cursor-not-allowed disabled:border-line-strong disabled:bg-transparent disabled:text-ink-3 disabled:opacity-100";
 
 /** Tombol sekunder (garis tepi netral). */
 export const kelasTombolSekunder =
@@ -448,7 +449,7 @@ export function DaftarTab({
             onKeyDown={saatTombol}
             className={`px-3.5 py-2 font-mono text-[11px] tracking-[0.14em] whitespace-nowrap uppercase transition-colors sm:px-4 ${
               ini
-                ? "bg-accent text-[#0a0a0b]"
+                ? "bg-accent text-accent-kontras"
                 : "text-ink-3 hover:bg-accent-soft hover:text-accent-ink"
             }`}
           >

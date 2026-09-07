@@ -1,10 +1,9 @@
 # Gambar sampul proyek
 
 Folder ini menampung gambar sampul (cover) yang tampil di kartu proyek pada
-bagian **Proyek**. Folder boleh dibiarkan kosong — bila tidak ada gambar, kartu
-otomatis menampilkan diagram arsitektur proyek tersebut, atau placeholder
-tipografis bila diagramnya pun belum ada. Tidak akan pernah muncul gambar rusak
-atau kotak kosong.
+bagian **Proyek**. Folder boleh dibiarkan kosong — bila field `image` sebuah
+proyek kosong atau dihapus, kartu otomatis menampilkan diagram arsitektur proyek
+tersebut, atau placeholder tipografis bila diagramnya pun belum ada.
 
 ## Cara menambahkan
 
@@ -20,8 +19,12 @@ atau kotak kosong.
    }
    ```
 
+3. Sediakan juga varian tema terangnya (lihat di bawah).
+
 Jika `image` dibiarkan `null` (atau field-nya dihapus), slot media jatuh ke
-diagram/placeholder seperti dijelaskan di atas.
+diagram/placeholder seperti dijelaskan di atas. Sebaliknya, bila `image` diisi,
+berkasnya **harus ada** — sampul dipasang sebagai latar CSS, jadi tidak ada
+pengecekan gagal-muat di sisi klien.
 
 ## Nama berkas yang diharapkan
 
@@ -37,9 +40,22 @@ tanda hubung:
 | Aplikasi Rental Mobil               | `rental-mobil.jpg`          |
 | Fasisi Project                      | `fasisi-project.jpg`        |
 
-Ekstensi `.jpg` dan `.png` sama-sama diterima. Bila path yang ditulis di
-`profile.ts` berakhiran `.jpg` tetapi yang ada di folder ini adalah `.png`
-(atau sebaliknya), varian satunya otomatis dicoba sebelum jatuh ke cadangan.
+### Dua berkas per sampul: gelap dan terang
+
+Setiap sampul butuh **dua** berkas: nama yang ditulis di `profile.ts` untuk tema
+gelap, dan nama yang sama plus akhiran `-terang` untuk tema terang.
+
+| Tema   | Berkas                        |
+| ------ | ----------------------------- |
+| Gelap  | `pintour-travel.jpg`          |
+| Terang | `pintour-travel-terang.jpg`   |
+
+Alasannya sederhana: tangkapan bertema gelap yang dipajang di halaman kertas
+terbaca sebagai persegi panjang hitam yang salah pasang, bukan sebagai pilihan
+desain. `skrip-tangkap.mjs` menghasilkan kedua berkas sekaligus.
+
+Pertukaran berkasnya dilakukan CSS (`.sampul-proyek` di `globals.css`), jadi
+peramban hanya mengunduh varian yang benar-benar tampil.
 
 ## Ukuran dan format
 
@@ -51,8 +67,8 @@ Ekstensi `.jpg` dan `.png` sama-sama diterima. Bila path yang ditulis di
 - **Ukuran berkas:** usahakan di bawah ±300 KB per gambar. Situs ini adalah
   static export dengan `images.unoptimized`, jadi gambar dikirim apa adanya
   tanpa dikompres ulang oleh Next.js.
-- **Kontras:** gambar tampil di tema gelap maupun terang — hindari sampul yang
-  hampir putih polos atau hampir hitam polos.
+- **Kontras:** sediakan varian per tema (lihat di bawah) — hindari memakai satu
+  sampul gelap untuk kedua tema.
 
 ## Catatan
 
@@ -94,9 +110,9 @@ npx http-server out -p 4321 -s          # sajikan hasil static export
 node skrip-tangkap.mjs
 ```
 
-Tangkapan diambil pada viewport 1600 × 900 (16 : 9) dan tema gelap, lalu
-dikonversi ke JPEG progresif tanpa metadata (EXIF/ICC) dengan target di bawah
-300 KB per berkas.
+Tangkapan diambil pada viewport 1600 × 900 (16 : 9), **sekali untuk tiap tema**,
+lalu dikonversi ke JPEG progresif tanpa metadata (EXIF/ICC) dengan target di
+bawah 300 KB per berkas.
 
 Sampul versi sebelumnya diambil pada `scrollY = 0`, sehingga isinya nyaris
 seluruhnya blok judul halaman: keempat kartu proyek jadi terlihat kembar dan

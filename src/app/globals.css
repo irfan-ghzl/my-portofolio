@@ -5,98 +5,142 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ---------------------------------------------------------------------------
-   Token warna.
+   Token warna — arah desain "Infrastruktur Nasional".
 
-   Aksen amber dipakai secara disiplin di kedua tema, dan sekarang punya makna
-   yang sempit: **sedang berjalan / perlu perhatian**. Di sampingnya ada tiga
-   token semantik tambahan, masing-masing mengikuti pola yang sama dengan
-   `--accent` (grafis / `-ink` untuk teks / `-soft` untuk latar pil):
+   Palet lama monokrom (satu aksen amber di atas abu netral) terbaca mati: tidak
+   ada kontras suhu sama sekali. Sekarang bidangnya **biru tengah malam**, bukan
+   abu netral, dan aksen identitasnya **sian**. Amber tetap ada tapi turun
+   pangkat: ia hanya berarti **sedang berjalan / perlu perhatian**.
 
-   | Token      | Makna                        | Contoh status                     |
-   | ---------- | ---------------------------- | --------------------------------- |
-   | `--ok`     | selesai positif / tersedia   | LUNAS, SELESAI, MENANG, TERSEDIA  |
-   | `--bahaya` | negatif / gagal / tertutup   | KEDALUWARSA, TOLAK, PENUH         |
-   | `--netral` | inert / belum tersentuh      | DRAF, BARU, MENUNGGU (antre)      |
+   Pembagian peran:
 
-   Semua pasangan `-ink` di atas latar `-soft` lolos WCAG AA (≥4.5:1) pada
-   ketiga permukaan (`--bg`, `--bg-soft`, `--bg-elev`) di kedua tema; warna
-   dasarnya sendiri (titik penanda) ≥3:1 sebagai elemen grafis non-teks.
-   Rasio terukur dicatat di komentar tiap blok.
+   | Token         | Peran                          | Contoh pemakaian                  |
+   | ------------- | ------------------------------ | --------------------------------- |
+   | `--accent`    | identitas / primer (sian)      | tautan, keadaan aktif, fokus, rusuk |
+   | `--perhatian` | sedang berjalan / perlu lihat  | AKTIF, MENUNGGU, pita penyangkalan |
+   | `--ok`        | selesai positif / tersedia     | LUNAS, SELESAI, MENANG, TERSEDIA  |
+   | `--bahaya`    | negatif / gagal / tertutup     | KEDALUWARSA, TOLAK, PENUH         |
+   | `--netral`    | inert / belum tersentuh        | DRAF, BARU, MENUNGGU (antre)      |
+   | `--violet`    | **hanya** gradien jaring hero  | —                                 |
+
+   Tiap keluarga semantik mengikuti pola yang sama: warna dasar (grafis),
+   `-ink` (teks), `-soft` (latar pil). Semua pasangan `-ink` di atas latar
+   `-soft` lolos WCAG AA (≥4,5:1) pada ketiga permukaan (`--bg`, `--bg-soft`,
+   `--bg-elev`) di kedua tema; warna dasarnya sendiri ≥3:1 sebagai elemen
+   grafis non-teks. Rasio terukur dicatat di komentar tiap blok.
+
+   `--accent-kontras` adalah warna teks di ATAS bidang `--accent` yang pekat
+   (tombol utama, lencana) — dulu nilai `#0a0a0b` yang ditulis langsung di
+   belasan komponen.
 
    Warna saja tidak pernah menjadi satu-satunya pembeda: setiap pil status juga
-   membawa label teks dan bentuk titik yang berbeda (lihat `PilStatus` di
+   membawa label teks dan bentuk ikon yang berbeda (lihat `PilStatus` di
    `src/components/prototipe/primitif.tsx`).
    --------------------------------------------------------------------------- */
 
 :root {
-  /* Tema terang — kertas hangat, tinta nyaris hitam. */
-  --bg: #faf8f4;
-  --bg-soft: #f2eee7;
+  /* Tema terang — kertas dingin (biru-abu), tinta biru tua nyaris hitam.
+     Bukan pembalikan tema gelap: permukaannya benar-benar kertas, dan setiap
+     aksen dipilih ulang pada tingkat kegelapan yang lolos AA di atas kertas. */
+  --bg: #f6f8fb;
+  --bg-soft: #edf1f7;
   --bg-elev: #ffffff;
-  --ink: #14130f;
-  --ink-2: #413d36;
-  --ink-3: #6a655c;
-  --line: rgba(20, 19, 15, 0.14);
-  --line-strong: rgba(20, 19, 15, 0.28);
-  --accent: #c67a00;
-  --accent-ink: #8a4b00;
-  --accent-soft: rgba(198, 122, 0, 0.12);
-  --accent-glow: rgba(198, 122, 0, 0.16);
+  --ink: #0b1220; /* 16,52–18,72:1 */
+  --ink-2: #47576e; /* 6,49–7,35:1 */
+  --ink-3: #556579; /* 5,26–5,96:1 */
+  --line: #dce3ed;
+  --line-strong: #a9bad1;
 
-  /* Hijau teredam — ink 5,05–5,78:1, titik 3,65–4,18:1. */
-  --ok: #2f7d54;
-  --ok-ink: #256545;
-  --ok-soft: rgba(47, 125, 84, 0.14);
+  /* Sian sebagai identitas — ink 5,47–6,14:1 di atas pil, grafis 4,73–5,36:1. */
+  --accent: #0e7490;
+  --accent-ink: #155e75;
+  --accent-dim: #0891b2;
+  --accent-soft: rgba(14, 116, 144, 0.12);
+  --accent-kontras: #ffffff; /* teks di atas --accent pekat: 5,36:1 */
 
-  /* Merah teredam — ink 5,51–6,32:1, titik 3,96–4,54:1. */
-  --bahaya: #c0392b;
-  --bahaya-ink: #9b2c20;
-  --bahaya-soft: rgba(192, 57, 43, 0.12);
+  /* Amber = sedang berjalan / perlu perhatian — ink 5,16–5,80:1, grafis 4,43–5,02:1. */
+  --perhatian: #b45309;
+  --perhatian-ink: #854d0e;
+  --perhatian-soft: rgba(180, 83, 9, 0.12);
+  --perhatian-kontras: #ffffff; /* teks di atas --perhatian pekat: 5,02:1 */
 
-  /* Slate teredam — ink 5,62–6,44:1, titik 3,66–4,20:1. */
-  --netral: #67707e;
-  --netral-ink: #4a5462;
-  --netral-soft: rgba(103, 112, 126, 0.14);
+  /* Hijau — ink 5,85–6,56:1, grafis 3,32–3,77:1. */
+  --ok: #059669;
+  --ok-ink: #065f46;
+  --ok-soft: rgba(5, 150, 105, 0.13);
 
-  --grid-line: rgba(20, 19, 15, 0.07);
-  --grid-dot: rgba(20, 19, 15, 0.16);
-  --shadow-card: 0 1px 2px rgba(20, 19, 15, 0.05);
-  --shadow-lift: 0 18px 40px -24px rgba(20, 19, 15, 0.4);
+  /* Merah mawar — ink 4,70–5,28:1, grafis 4,14–4,70:1. */
+  --bahaya: #e11d48;
+  --bahaya-ink: #be123c;
+  --bahaya-soft: rgba(225, 29, 72, 0.11);
+
+  /* Slate — ink 5,76–6,46:1, grafis 4,20–4,76:1. */
+  --netral: #64748b;
+  --netral-ink: #475569;
+  --netral-soft: rgba(100, 116, 139, 0.13);
+
+  /* Hanya untuk jaring gradien di belakang hero. */
+  --violet: #6366f1;
+  --jaring-sian: color-mix(in srgb, var(--accent-dim) 8%, transparent);
+  --jaring-violet: color-mix(in srgb, var(--violet) 6%, transparent);
+
+  --grid-line: rgba(11, 18, 32, 0.06);
+  --grid-dot: rgba(11, 18, 32, 0.14);
+  --shadow-card: 0 1px 2px rgba(11, 18, 32, 0.06);
+  --shadow-lift: 0 18px 40px -24px rgba(11, 18, 32, 0.38);
   color-scheme: light;
 }
 
 .dark {
-  /* Tema gelap — bidang nyaris hitam, tinta putih hangat. */
-  --bg: #0a0a0b;
-  --bg-soft: #101012;
-  --bg-elev: #141416;
-  --ink: #f6f4f0;
-  --ink-2: #bfbbb3;
-  --ink-3: #8d8880;
-  --line: rgba(246, 244, 240, 0.12);
-  --line-strong: rgba(246, 244, 240, 0.26);
-  --accent: #ffb020;
-  --accent-ink: #ffc45c;
-  --accent-soft: rgba(255, 176, 32, 0.12);
-  --accent-glow: rgba(255, 176, 32, 0.14);
+  /* Tema gelap — biru tengah malam, bukan hitam netral. Itu satu perubahan
+     yang paling menghidupkan halaman: bidangnya sekarang punya suhu. */
+  --bg: #070b14;
+  --bg-soft: #0d1421;
+  --bg-elev: #141d2e;
+  --ink: #e8eef7; /* 14,46–16,87:1 */
+  --ink-2: #94a6bf; /* 6,80–7,93:1 */
+  --ink-3: #8494ad; /* 5,48–6,39:1 — #64748b yang disarankan hanya 3,54:1 di
+                       atas --bg-elev. Dinaikkan sampai teks teredam tetap
+                       lolos AA bahkan di atas panel ber-tint `--accent-soft`. */
+  --line: #1e2a3d;
+  --line-strong: #3a4c68;
 
-  /* Hijau teredam — ink 8,07–8,88:1, titik 4,65–5,12:1. */
-  --ok: #3f9e6b;
-  --ok-ink: #7fcba0;
-  --ok-soft: rgba(63, 158, 107, 0.14);
+  /* Sian sebagai identitas — ink 8,74–10,71:1 di atas pil, grafis 9,33–10,89:1. */
+  --accent: #22d3ee;
+  --accent-ink: #67e8f9;
+  --accent-dim: #0891b2;
+  --accent-soft: rgba(34, 211, 238, 0.1); /* 0,14 membuat panel terpilih
+     terlalu terang: teks `--ink-3` di atasnya turun ke 3,6:1. */
+  --accent-kontras: #04070d; /* teks di atas --accent pekat: 11,16:1 */
 
-  /* Merah teredam — ink 7,06–7,79:1, titik 4,03–4,44:1. */
-  --bahaya: #d9544a;
-  --bahaya-ink: #f2938a;
-  --bahaya-soft: rgba(217, 84, 74, 0.14);
+  /* Amber = sedang berjalan / perlu perhatian — ink 8,69–10,72:1, grafis 10,10–11,79:1. */
+  --perhatian: #fbbf24;
+  --perhatian-ink: #fcd34d;
+  --perhatian-soft: rgba(251, 191, 36, 0.14);
+  --perhatian-kontras: #04070d; /* 12,08:1 */
 
-  /* Slate teredam — ink 6,85–7,58:1, titik 3,38–3,74:1. */
-  --netral: #6b7686;
-  --netral-ink: #a3adbb;
-  --netral-soft: rgba(107, 118, 134, 0.16);
+  /* Hijau — ink 8,43–10,31:1, grafis 8,77–10,24:1. */
+  --ok: #34d399;
+  --ok-ink: #6ee7b7;
+  --ok-soft: rgba(52, 211, 153, 0.14);
 
-  --grid-line: rgba(246, 244, 240, 0.06);
-  --grid-dot: rgba(246, 244, 240, 0.14);
+  /* Merah mawar — ink 7,29–8,82:1, grafis 6,27–7,31:1. */
+  --bahaya: #fb7185;
+  --bahaya-ink: #fda4af;
+  --bahaya-soft: rgba(251, 113, 133, 0.14);
+
+  /* Slate — ink 6,93–8,27:1, grafis 3,54–4,14:1. */
+  --netral: #64748b;
+  --netral-ink: #a5b4c8;
+  --netral-soft: rgba(100, 116, 139, 0.14);
+
+  /* Hanya untuk jaring gradien di belakang hero. */
+  --violet: #818cf8;
+  --jaring-sian: color-mix(in srgb, var(--accent) 8%, transparent);
+  --jaring-violet: color-mix(in srgb, var(--violet) 6%, transparent);
+
+  --grid-line: rgba(148, 166, 191, 0.07);
+  --grid-dot: rgba(148, 166, 191, 0.16);
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.5);
   --shadow-lift: 0 24px 48px -28px rgba(0, 0, 0, 0.9);
   color-scheme: dark;
@@ -113,7 +157,14 @@
   --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
+  --color-accent-dim: var(--accent-dim);
   --color-accent-soft: var(--accent-soft);
+  --color-accent-kontras: var(--accent-kontras);
+  --color-perhatian: var(--perhatian);
+  --color-perhatian-ink: var(--perhatian-ink);
+  --color-perhatian-soft: var(--perhatian-soft);
+  --color-perhatian-kontras: var(--perhatian-kontras);
+  --color-violet: var(--violet);
   --color-ok: var(--ok);
   --color-ok-ink: var(--ok-ink);
   --color-ok-soft: var(--ok-soft);
@@ -138,6 +189,11 @@
   --text-stat: clamp(2.5rem, 1.1rem + 4.4vw, 4.5rem);
   --text-stat--line-height: 0.9;
   --text-stat--letter-spacing: -0.03em;
+  /* Angka pita statistik — sengaja lebih besar dari `--text-stat`: pita itu
+     aset paling meyakinkan di halaman dan harus punya kehadiran sendiri. */
+  --text-angka: clamp(3.25rem, 1.3rem + 6.4vw, 6.25rem);
+  --text-angka--line-height: 0.86;
+  --text-angka--letter-spacing: -0.04em;
   --text-h2: clamp(1.75rem, 1.1rem + 1.9vw, 2.75rem);
   --text-h2--line-height: 1.05;
   --text-h2--letter-spacing: -0.025em;
@@ -159,7 +215,7 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: #0a0a0b;
+  color: var(--accent-kontras);
 }
 
 /* Fokus keyboard yang konsisten dan terlihat di kedua tema. */
@@ -215,13 +271,45 @@ body {
   mask-image: radial-gradient(75% 60% at 18% 12%, #000 0%, transparent 72%);
 }
 
-/* Cahaya aksen yang ditahan — hanya satu, di belakang hero. */
-.cahaya-aksen {
-  background: radial-gradient(
-    38rem 26rem at 78% 8%,
-    var(--accent-glow),
-    transparent 70%
-  );
+/* ---------------------------------------------------------------------------
+   Jaring gradien di belakang hero.
+
+   Dua lingkaran radial yang sangat tipis — sian ±8 % di kanan atas, violet
+   ±6 % di kiri bawah — untuk memberi kedalaman dan kontras suhu pada bidang
+   yang dulunya rata. Sengaja ditahan: tidak ada satu pun pasangan teks/latar
+   yang turun di bawah AA karenanya — rasio hero diukur ulang di atas warna
+   jaring yang paling pekat, bukan di atas `--bg` polos.
+   --------------------------------------------------------------------------- */
+.jaring-hero {
+  background:
+    radial-gradient(
+      44rem 30rem at 82% 4%,
+      var(--jaring-sian),
+      transparent 68%
+    ),
+    radial-gradient(
+      38rem 28rem at 6% 88%,
+      var(--jaring-violet),
+      transparent 70%
+    );
+}
+
+/* ---------------------------------------------------------------------------
+   Sampul kartu proyek per tema.
+
+   Dua berkas per proyek; yang diunduh hanya yang dipakai. Lihat `MediaProyek`
+   untuk alasan memakai latar CSS alih-alih <picture> atau sepasang <img>.
+   --------------------------------------------------------------------------- */
+
+.sampul-proyek {
+  background-image: var(--sampul-terang);
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+.dark .sampul-proyek {
+  background-image: var(--sampul-gelap);
 }
 
 /* Garis pemisah tipis yang memudar di kedua ujung. */
@@ -259,15 +347,16 @@ body {
 /* ---------------------------------------------------------------------------
    Pita penyangkalan tipis di halaman prototipe.
 
-   Latarnya amber yang dicampur ke warna latar halaman, bukan amber penuh: ada
-   dan tidak mungkin terlewat, tapi tidak lagi mengalahkan judul halaman.
-   Opak (bukan rgba) supaya isi yang lewat di baliknya tidak menembus.
-   Kontras teks `--accent-ink` di atasnya 10,4:1 (gelap) dan 5,7:1 (terang).
+   Latarnya amber (`--perhatian`, nada "perlu perhatian") yang dicampur ke
+   warna latar halaman, bukan amber penuh: ada dan tidak mungkin terlewat, tapi
+   tidak lagi mengalahkan judul halaman. Opak (bukan rgba) supaya isi yang
+   lewat di baliknya tidak menembus. Kontras teks `--perhatian-ink` di atasnya
+   diukur ulang di `skrip-ukur.mjs` dan lolos AA di kedua tema.
    --------------------------------------------------------------------------- */
 
 .pita-tipis {
-  background-color: color-mix(in srgb, var(--accent) 12%, var(--bg));
-  border-bottom: 1px solid color-mix(in srgb, var(--accent) 38%, var(--bg));
+  background-color: color-mix(in srgb, var(--perhatian) 12%, var(--bg));
+  border-bottom: 1px solid color-mix(in srgb, var(--perhatian) 38%, var(--bg));
 }
 
 /* Pita di atas hanya ±22 px, tapi jangkar tetap tidak boleh mendarat di
@@ -309,11 +398,13 @@ html:not(.js) [data-tanpa-js] {
   display: none;
 }
 
-/* Denyut halus untuk penanda posisi aktif. */
+/* Denyut halus untuk penanda posisi aktif. Warnanya mengikuti nada penanda:
+   pemanggil boleh menimpa `--denyut-warna` (mis. amber untuk "sedang
+   berjalan", hijau untuk "tersedia"). */
 @keyframes denyut-node {
   0%,
   100% {
-    box-shadow: 0 0 0 0 var(--accent-soft);
+    box-shadow: 0 0 0 0 var(--denyut-warna, var(--accent-soft));
   }
   50% {
     box-shadow: 0 0 0 7px transparent;

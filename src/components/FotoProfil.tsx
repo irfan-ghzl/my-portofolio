@@ -25,8 +25,12 @@ export default function FotoProfil({ src, nama }: FotoProfilProps) {
   const berkas = kandidat[indeks];
 
   return (
-    <div className="relative w-28 shrink-0 sm:w-32 lg:w-full lg:max-w-[13.5rem]">
-      <div className="relative aspect-square overflow-hidden border border-line-strong bg-bg-soft">
+    /* Di layar sempit potret duduk SETELAH nama dan tombol, sebagai pita rendah
+       (kotak kecil + rusuk tipis) supaya tidak menjadi balok besar yang
+       menghabiskan tinggi. Di ≥1024 px ia kembali menjadi kolom kanan hero. */
+    <div className="flex items-center gap-5 lg:block">
+      <div className="relative w-24 shrink-0 sm:w-28 lg:w-full lg:max-w-[13.5rem]">
+        <div className="relative aspect-square overflow-hidden border border-line-strong bg-bg-soft">
         {berkas ? (
           <Image
             src={berkas}
@@ -68,11 +72,16 @@ export default function FotoProfil({ src, nama }: FotoProfilProps) {
           aria-hidden="true"
           className="pointer-events-none absolute right-0 bottom-0 h-4 w-px bg-accent"
         />
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute right-0 bottom-0 h-px w-4 bg-accent"
-        />
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute right-0 bottom-0 h-px w-4 bg-accent"
+          />
+        </div>
       </div>
+
+      {/* Rusuk yang menjahit potret ke tepi kanan di layar sempit, supaya ia
+          terbaca sebagai penutup hero, bukan kotak yang terdampar. */}
+      <span aria-hidden="true" className="h-px flex-1 bg-line lg:hidden" />
     </div>
   );
 }

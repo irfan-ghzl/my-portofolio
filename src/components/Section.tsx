@@ -20,7 +20,7 @@ export default function Section({
     <section
       id={id}
       aria-labelledby={`${id}-judul`}
-      className="scroll-mt-24 border-t border-line py-20 sm:py-28"
+      className="scroll-mt-24 border-t border-line py-12 sm:py-16"
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="grid gap-6 md:grid-cols-[7rem_minmax(0,1fr)] md:gap-10">
@@ -33,7 +33,7 @@ export default function Section({
             </span>
             <span
               aria-hidden="true"
-              className="mt-3 hidden h-px w-12 bg-line-strong md:block"
+              className="mt-3 hidden h-px w-12 bg-accent-dim md:block"
             />
           </div>
 
@@ -53,7 +53,7 @@ export default function Section({
                 </p>
               ) : null}
             </div>
-            <div className="mt-10 sm:mt-14">{children}</div>
+            <div className="mt-8 sm:mt-12">{children}</div>
           </div>
         </div>
       </div>

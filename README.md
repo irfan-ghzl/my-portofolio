@@ -64,11 +64,13 @@ memaksa monogram.
 
 ### Gambar sampul proyek
 
-Letakkan di `public/projects/` lalu isi field `image` pada proyek terkait.
+Butuh dua berkas per sampul (tema gelap dan tema terang). Letakkan di
+`public/projects/` lalu isi field `image` pada proyek terkait dengan nama varian
+gelapnya; varian terangnya dicari otomatis dengan akhiran `-terang`.
 Panduan lengkap (nama berkas, rasio 16:9, ukuran) ada di
-[`public/projects/README.md`](public/projects/README.md). Bila `image` kosong,
-kartu proyek jatuh ke diagram arsitektur proyek itu, atau ke placeholder
-tipografis bila diagramnya belum ada.
+[`public/projects/README.md`](public/projects/README.md). Bila `image` kosong
+atau dihapus, kartu proyek jatuh ke diagram arsitektur proyek itu, atau ke
+placeholder tipografis bila diagramnya belum ada.
 
 ## Diagram arsitektur
 
@@ -96,17 +98,66 @@ src/
     diagrams/         # diagram arsitektur (SVG inline buatan tangan)
   data/
     profile.ts        # SEMUA konten situs
-  lib/                # helper kecil (path gambar, inisial)
+  lib/                # helper kecil (path gambar, inisial, bobot keahlian)
 public/               # aset statis
   profile.jpg         # foto profil (opsional; fallback ke monogram)
   projects/           # gambar sampul proyek (opsional) — lihat README di dalamnya
 .github/workflows/    # workflow deploy GitHub Pages
+skrip-tangkap.mjs     # perkakas: tangkap ulang sampul proyek (2 tema)
+skrip-ukur.mjs        # perkakas: ukur kontras + luapan + tangkapan layar
 ```
 
-## Tema
+### Bobot keahlian
+
+Dinding **Keahlian** punya tiga berat visual. Tingkatnya dihitung di
+[`src/lib/keahlian.ts`](src/lib/keahlian.ts) dari data yang sudah ada di
+`profile.ts` — tidak ada angka kemahiran, bintang, atau persentase yang
+dikarang. Skornya: +3 bila nama itu disebut di butir pengalaman peran yang
+sedang berjalan, +1 bila disebut di peran sebelumnya, +1 per proyek yang
+mencantumkannya di `tech`, dan +1 per proyek yang menyebutnya di `description`.
+
+## Tema dan warna
 
 Mode gelap adalah default. Tombol di pojok kanan atas mengalihkan ke mode terang,
 dan pilihan disimpan di `localStorage` dengan kunci `tema`.
+
+Paletnya bernama **"Infrastruktur Nasional"**. Bidangnya biru tengah malam
+(bukan hitam netral), aksen identitasnya sian, dan amber turun pangkat menjadi
+satu makna saja: *sedang berjalan / perlu perhatian*.
+
+| Token         | Peran                         | Gelap     | Terang    |
+| ------------- | ----------------------------- | --------- | --------- |
+| `--bg`        | bidang halaman                | `#070b14` | `#f6f8fb` |
+| `--bg-soft`   | permukaan cekung / pita       | `#0d1421` | `#edf1f7` |
+| `--bg-elev`   | kartu terangkat               | `#141d2e` | `#ffffff` |
+| `--ink`       | teks utama                    | `#e8eef7` | `#0b1220` |
+| `--ink-2`     | teks sekunder                 | `#94a6bf` | `#47576e` |
+| `--ink-3`     | teks teredam                  | `#8494ad` | `#556579` |
+| `--accent`    | identitas / primer (sian)     | `#22d3ee` | `#0e7490` |
+| `--perhatian` | sedang berjalan / perlu lihat | `#fbbf24` | `#b45309` |
+| `--ok`        | selesai positif / tersedia    | `#34d399` | `#059669` |
+| `--bahaya`    | negatif / gagal / tertutup    | `#fb7185` | `#e11d48` |
+| `--netral`    | inert / belum tersentuh       | `#64748b` | `#64748b` |
+| `--violet`    | hanya gradien jaring hero     | `#818cf8` | `#6366f1` |
+
+Definisi lengkap beserta rasio kontras terukur ada di
+[`src/app/globals.css`](src/app/globals.css).
+
+### Memverifikasi kontras dan luapan
+
+[`skrip-ukur.mjs`](skrip-ukur.mjs) membuka keenam rute di kedua tema, membaca
+setiap pasangan teks/latar dari DOM yang benar-benar dirender (termasuk latar
+semitransparan yang ditumpuk), mengecek luapan mendatar pada 320/390/768/1024/1440,
+lalu menyimpan tangkapan layar penuh:
+
+```bash
+npm run build
+npx http-server out -p 4321 -s
+node skrip-ukur.mjs        # butuh `playwright` yang bisa diresolusi
+```
+
+Skrip berhenti dengan daftar pelanggaran bila ada pasangan yang jatuh di bawah
+WCAG AA (4,5:1 teks biasa, 3:1 teks besar).
 
 ## Deploy ke GitHub Pages
 
