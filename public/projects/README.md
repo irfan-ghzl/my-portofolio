@@ -56,7 +56,43 @@ Ekstensi `.jpg` dan `.png` sama-sama diterima. Bila path yang ditulis di
 
 ## Catatan
 
-Gambar di folder ini harus benar-benar berasal dari proyek yang bersangkutan
-(tangkapan layar asli, foto, atau materi milik sendiri). Jangan memakai mockup
-atau gambar hasil rekaan yang bisa disalahartikan sebagai tampilan aplikasi
-yang sebenarnya.
+Gambar di folder ini harus berasal dari materi milik sendiri: tangkapan layar
+aplikasi yang sungguhan, foto, atau — seperti keempat berkas yang ada sekarang —
+tangkapan halaman prototipe UI di situs ini. Yang tidak boleh adalah gambar yang
+**bisa disalahartikan** sebagai tampilan aplikasi produksi padahal bukan. Karena
+itu sampul yang berasal dari prototipe wajib ditandai; lihat bagian berikutnya.
+
+## Sampul dari halaman prototipe
+
+Empat berkas yang ada sekarang — `pintour-travel.jpg`,
+`manajemen-program.jpg`, `pengaduan-masyarakat.jpg`, dan `rental-mobil.jpg` —
+**bukan** tangkapan layar aplikasi produksi. Keempatnya adalah tangkapan
+otomatis dari halaman prototipe UI di situs ini sendiri
+(`/prototipe/<slug>/`, lihat [`src/data/prototipe.ts`](../../src/data/prototipe.ts)),
+yaitu rekonstruksi antarmuka yang dibuat khusus untuk portofolio ini.
+
+Karena itu berlaku dua aturan berikut:
+
+1. Setiap halaman prototipe memuat pita penyangkalan permanen di puncak
+   halaman, dan tangkapan diambil dari puncak halaman sehingga pita itu selalu
+   ikut terlihat di dalam gambar.
+2. Proyek yang mengisi field `prototype` di `profile.ts` otomatis mendapat
+   lencana **PROTOTIPE** di sudut gambar sampulnya beserta keterangan di
+   bawahnya, ditambah teks alternatif yang menyebut bahwa gambar tersebut bukan
+   aplikasi produksi.
+
+Bila suatu saat sampul diganti dengan tangkapan layar aplikasi yang sungguhan,
+hapus juga field `prototype` pada proyek itu agar lencana "PROTOTIPE" tidak
+lagi tampil.
+
+### Cara mengambil ulang
+
+```bash
+npm run build
+npx http-server out -p 4321 -s          # sajikan hasil static export
+PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers node skrip-tangkap.mjs
+```
+
+Tangkapan diambil pada viewport 1600 × 900 (16 : 9), tema gelap, `scrollY = 0`,
+lalu dikonversi ke JPEG progresif tanpa metadata (EXIF/ICC) dengan target di
+bawah 300 KB per berkas.

@@ -196,6 +196,38 @@ body {
   transition-delay: var(--reveal-delay, 0ms);
 }
 
+/* ---------------------------------------------------------------------------
+   Halaman prototipe tanpa JavaScript.
+
+   Panel tab selalu ada di DOM; yang tidak aktif diberi atribut `hidden`. Bila
+   JavaScript tidak berjalan (kelas `js` tidak pernah dipasang di <html>),
+   seluruh panel ditampilkan sekaligus supaya isinya tetap terbaca, dan kendali
+   yang memang butuh JS disembunyikan agar tidak menipu.
+   --------------------------------------------------------------------------- */
+
+/* Aturan ini harus berada di dalam `@layer base`, satu lapisan dengan preflight
+   Tailwind yang menyembunyikan `[hidden]` memakai `!important`: untuk deklarasi
+   `!important`, urutan lapisan justru terbalik dan gaya tanpa lapisan kalah dari
+   gaya berlapis. Di dalam lapisan yang sama, spesifisitas yang lebih tinggi
+   menang seperti biasa. */
+@layer base {
+  html:not(.js) [data-panel-prototipe][hidden] {
+    display: block !important;
+  }
+}
+
+html:not(.js) [data-butuh-js] {
+  display: none !important;
+}
+
+html:not(.js) [data-tanpa-js] {
+  display: block;
+}
+
+[data-tanpa-js] {
+  display: none;
+}
+
 /* Denyut halus untuk penanda posisi aktif. */
 @keyframes denyut-node {
   0%,

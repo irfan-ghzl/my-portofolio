@@ -30,9 +30,14 @@ export const metadata: Metadata = {
 /**
  * Skrip kecil yang berjalan sebelum paint untuk menerapkan tema tersimpan,
  * sehingga tidak ada kedipan warna saat halaman dimuat. Default: gelap.
+ *
+ * Sekalian memasang kelas `js` pada <html>. Kelas itu dipakai halaman prototipe
+ * untuk mendeteksi ketiadaan JavaScript lewat CSS (`html:not(.js)`) dan
+ * menampilkan seluruh panel tab sekaligus alih-alih menyembunyikan sebagian.
  */
 const themeScript = `
 (function () {
+  document.documentElement.classList.add("js");
   try {
     var stored = localStorage.getItem("tema");
     if (stored === "terang") {
