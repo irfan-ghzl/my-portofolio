@@ -35,22 +35,54 @@ memperbarui konten tidak perlu menyentuh kode komponen.
 
 Isi file tersebut:
 
-| Ekspor           | Bagian di situs                                  |
-| ---------------- | ------------------------------------------------ |
-| `identity`       | Nama, headline, tagline, lokasi, dan kontak      |
-| `about`          | Paragraf bagian "Tentang" (satu string per paragraf) |
-| `stats`          | Angka-angka pada stats band                      |
-| `experiences`    | Linimasa pengalaman kerja (urut dari terbaru)    |
-| `projects`       | Daftar proyek                                    |
-| `skills`         | Keahlian yang dikelompokkan per kategori         |
-| `education`      | Riwayat pendidikan                               |
-| `certifications` | Sertifikasi                                      |
+| Ekspor           | Bagian di situs                                           |
+| ---------------- | --------------------------------------------------------- |
+| `identity`       | Nama, headline, tagline, lokasi, dan kontak               |
+| `about`          | Paragraf bagian "Tentang" (satu string per paragraf)      |
+| `stats`          | Angka-angka pada stats band                               |
+| `experiences`    | Linimasa pengalaman kerja (urut dari terbaru)             |
+| `projects`       | Daftar proyek                                             |
+| `skills`         | Keahlian yang dikelompokkan per kategori                  |
+| `education`      | Riwayat pendidikan                                        |
+| `certifications` | Sertifikasi                                               |
 | `navigation`     | Tautan menu (nilai `id` harus sama dengan id `<section>`) |
 
 Semua struktur data punya tipe TypeScript, sehingga kesalahan penulisan akan
 terdeteksi saat `npm run build`. Field opsional (misalnya `description` pada
 proyek atau `gpa` pada pendidikan) boleh dihilangkan — bagian terkait tidak akan
 dirender.
+
+## Gambar
+
+### Foto profil
+
+Letakkan foto di `public/profile.jpg` (`.png` juga diterima). Path-nya diatur
+lewat `identity.photo` di `profile.ts` dan defaultnya sudah `/profile.jpg`.
+Selama berkasnya belum ada — atau gagal dimuat — Hero menampilkan monogram
+inisial bergaya sistem desain, bukan gambar rusak. Setel `photo: null` untuk
+memaksa monogram.
+
+### Gambar sampul proyek
+
+Letakkan di `public/projects/` lalu isi field `image` pada proyek terkait.
+Panduan lengkap (nama berkas, rasio 16:9, ukuran) ada di
+[`public/projects/README.md`](public/projects/README.md). Bila `image` kosong,
+kartu proyek jatuh ke diagram arsitektur proyek itu, atau ke placeholder
+tipografis bila diagramnya belum ada.
+
+## Diagram arsitektur
+
+Diagram di bagian Pengalaman dan Proyek adalah **SVG inline buatan tangan** di
+[`src/components/diagrams/`](src/components/diagrams/) — bukan berkas gambar —
+sehingga warnanya mengikuti token tema dan tetap terbaca di mode gelap maupun
+terang. Setiap diagram punya `<title>` dan `<desc>` berbahasa Indonesia, dan
+dibungkus area gulir mendatar yang bisa difokuskan lewat papan ketik saat layar
+terlalu sempit.
+
+Untuk memasang diagram pada sebuah entri, isi `diagram` (salah satu nilai
+`DiagramKey`) dan `diagramCaption` pada `experiences` atau `projects` di
+`profile.ts`. Pemetaan kunci → komponen ada di
+[`src/components/diagrams/index.tsx`](src/components/diagrams/index.tsx).
 
 ## Struktur proyek
 
@@ -61,9 +93,13 @@ src/
     page.tsx          # susunan urutan seksi halaman
     globals.css       # Tailwind + token tema
   components/         # komponen per seksi (Hero, StatsBand, dst.)
+    diagrams/         # diagram arsitektur (SVG inline buatan tangan)
   data/
     profile.ts        # SEMUA konten situs
+  lib/                # helper kecil (path gambar, inisial)
 public/               # aset statis
+  profile.jpg         # foto profil (opsional; fallback ke monogram)
+  projects/           # gambar sampul proyek (opsional) — lihat README di dalamnya
 .github/workflows/    # workflow deploy GitHub Pages
 ```
 
@@ -84,11 +120,11 @@ dan pilihan disimpan di `localStorage` dengan kunci `tema`.
 
 ### Base path
 
-Untuk *project site* (`https://<user>.github.io/<repo>`), Next.js perlu tahu
+Untuk _project site_ (`https://<user>.github.io/<repo>`), Next.js perlu tahu
 prefiks path-nya. Workflow menghitungnya otomatis dan meneruskannya lewat
 variabel lingkungan `NEXT_PUBLIC_BASE_PATH`.
 
-- *User site* (`<user>.github.io`) atau domain kustom → kosongkan
+- _User site_ (`<user>.github.io`) atau domain kustom → kosongkan
   `NEXT_PUBLIC_BASE_PATH`.
 - Build lokal dengan base path tertentu:
 

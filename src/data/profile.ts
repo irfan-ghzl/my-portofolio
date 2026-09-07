@@ -15,7 +15,28 @@ export type Identity = {
   phone: string;
   linkedin: string;
   github: string;
+  /**
+   * Path foto profil relatif terhadap folder `public/`, mis. "/profile.jpg".
+   *
+   * Cukup letakkan berkasnya di `public/profile.jpg` (atau `.png` — varian
+   * ekstensi lain otomatis dicoba bila yang pertama gagal dimuat). Bila berkas
+   * belum ada, gagal dimuat, atau nilai ini `null`, Hero otomatis menampilkan
+   * monogram inisial sebagai gantinya — jadi tidak akan ada gambar rusak.
+   */
+  photo: string | null;
 };
+
+/**
+ * Kunci diagram arsitektur yang digambar tangan sebagai komponen SVG di
+ * `src/components/diagrams/`. Pemetaan kunci → komponen ada di
+ * `src/components/diagrams/index.tsx`.
+ */
+export type DiagramKey =
+  | "belajar-id-pipeline"
+  | "pintour-travel"
+  | "manajemen-program"
+  | "pengaduan"
+  | "rental-mobil";
 
 export type Stat = {
   /** Angka besar yang ditampilkan, mis. "30,7 juta" */
@@ -32,6 +53,10 @@ export type Experience = {
   /** Ditandai true untuk posisi yang sedang berjalan */
   current?: boolean;
   bullets: string[];
+  /** Diagram arsitektur yang ditampilkan di dalam kartu pengalaman. */
+  diagram?: DiagramKey;
+  /** Keterangan singkat di bawah diagram. Wajib bila `diagram` diisi. */
+  diagramCaption?: string;
 };
 
 export type Project = {
@@ -40,6 +65,19 @@ export type Project = {
   description?: string;
   tech: string[];
   repos?: string[];
+  /**
+   * Gambar sampul proyek, relatif terhadap `public/`, mis.
+   * "/projects/pintour-travel.jpg". Lihat `public/projects/README.md` untuk
+   * nama berkas dan ukuran yang diharapkan.
+   *
+   * Bila kosong/null atau gagal dimuat, kartu jatuh ke diagram arsitektur
+   * (`diagram`) bila ada; bila tidak ada juga, ke placeholder tipografis.
+   */
+  image?: string | null;
+  /** Diagram arsitektur yang ditampilkan di dalam kartu proyek. */
+  diagram?: DiagramKey;
+  /** Keterangan singkat di bawah diagram. Wajib bila `diagram` diisi. */
+  diagramCaption?: string;
 };
 
 export type SkillGroup = {
@@ -84,6 +122,7 @@ export const identity: Identity = {
   phone: "(+62) 87789509545",
   linkedin: "https://www.linkedin.com/in/ahmad-irfan-ghazali",
   github: "https://github.com/irfan-ghzl",
+  photo: "/profile.jpg",
 };
 
 /** Setiap elemen array adalah satu paragraf. */
@@ -117,6 +156,9 @@ export const experiences: Experience[] = [
       "Menyusun technical design document dan runbook untuk operasi berisiko tinggi, termasuk verifikasi jumlah data bersama pemangku kepentingan sebelum eksekusi produksi.",
       "Bekerja dengan metode Scrum: daily standup, sprint planning, refinement, retrospektif, dan code review.",
     ],
+    diagram: "belajar-id-pipeline",
+    diagramCaption:
+      "Pipeline provisioning akun Google Workspace belajar.id: perubahan data ditangkap lewat CDC, disebar melalui Pub/Sub, lalu diproses consumer terpisah untuk 7 jenjang pendidikan. Ditopang backend Go (gRPC, PostgreSQL, Kubernetes) yang menaungi 20 layanan di 86 pod.",
   },
   {
     role: "Back End Developer",
@@ -164,18 +206,30 @@ export const projects: Project[] = [
       "https://github.com/irfan-ghzl/travel-fe",
       "https://github.com/irfan-ghzl/Travel",
     ],
+    image: null,
+    diagram: "pintour-travel",
+    diagramCaption:
+      "Frontend TypeScript dan REST API Go berjalan sebagai dua aplikasi independen, dengan PostgreSQL sebagai penyimpanan data.",
   },
   {
     name: "Sistem Full-Stack Manajemen Program",
     description:
       "Sistem full-stack mencakup katalog, CRM leads, invoice, hingga portal peserta, dengan integrasi WhatsApp Gateway (Fonnte), payment gateway (Midtrans), chatbot AI (Gemini), dan OCR self-hosted untuk ekstraksi dokumen. Didahului penyusunan PRD dengan 51 functional requirement dan 9 modul.",
     tech: ["Go/Echo", "React", "TypeScript", "PostgreSQL"],
+    image: null,
+    diagram: "manajemen-program",
+    diagramCaption:
+      "Backend Go/Echo menaungi modul katalog, CRM leads, invoice, dan portal peserta, dengan integrasi ke Fonnte, Midtrans, Gemini, dan OCR self-hosted.",
   },
   {
     name: "Sistem Pengaduan Masyarakat",
     description:
       "Sistem pengaduan berbasis web dengan alur end-to-end: pelaporan, disposisi ke petugas, tanggapan, hingga notifikasi pelapor. Basis data 8 tabel dan REST API multi-role (masyarakat & petugas) dengan autentikasi JWT, hashing bcrypt, rate limiting, dan validasi input. Dilengkapi dokumentasi API, perancangan UML, dan panduan deployment berbasis Docker Compose.",
     tech: ["Node.js/Express", "React", "PostgreSQL", "Docker Compose"],
+    image: null,
+    diagram: "pengaduan",
+    diagramCaption:
+      "Alur pengaduan dari pelaporan sampai notifikasi pelapor, di atas REST API multi-peran Node.js/Express dengan basis data 8 tabel, dijalankan lewat Docker Compose.",
   },
   {
     name: "CRM",
@@ -188,6 +242,10 @@ export const projects: Project[] = [
     description:
       "Aplikasi web rental mobil dengan arsitektur MVC dan dua hak akses (admin dan penyewa). Alur transaksi end-to-end: katalog mobil dengan status ketersediaan, pemesanan, unggah bukti pembayaran, konfirmasi oleh admin, hingga pengembalian unit.",
     tech: ["PHP", "CodeIgniter 3", "MySQL", "Bootstrap"],
+    image: null,
+    diagram: "rental-mobil",
+    diagramCaption:
+      "Arsitektur MVC CodeIgniter 3 dengan dua hak akses, serta alur transaksi dari katalog sampai pengembalian unit.",
   },
   {
     name: "Fasisi Project",

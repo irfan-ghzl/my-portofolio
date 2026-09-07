@@ -37,7 +37,9 @@ export default function Section({
             />
           </div>
 
-          <div>
+          {/* `min-w-0` menahan konten lebar (mis. area gulir diagram) agar tidak
+              memaksa kolom grid melebar dan membuat halaman menggulir mendatar. */}
+          <div className="min-w-0">
             <div data-reveal>
               <h2
                 id={`${id}-judul`}

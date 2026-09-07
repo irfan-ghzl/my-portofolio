@@ -1,4 +1,5 @@
 import { experiences } from "@/data/profile";
+import Diagram, { adaDiagram } from "./diagrams";
 import Section from "./Section";
 
 export default function ExperienceTimeline() {
@@ -57,6 +58,18 @@ export default function ExperienceTimeline() {
                   </li>
                 ))}
               </ul>
+
+              {/* Lampiran teknis untuk peran ini — dibaca sebagai bukti kerja,
+                  bukan hiasan. */}
+              {adaDiagram(exp.diagram) && exp.diagramCaption ? (
+                <div className="mt-8">
+                  <Diagram
+                    diagram={exp.diagram}
+                    caption={exp.diagramCaption}
+                    label="Diagram arsitektur — pipeline provisioning"
+                  />
+                </div>
+              ) : null}
             </article>
           </li>
         ))}
